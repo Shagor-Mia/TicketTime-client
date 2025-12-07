@@ -20,6 +20,8 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Profile from "../pages/Dashboard/Common/Profile";
 import ManageOrders from "../pages/Dashboard/Vendors/ManageOrders";
 import DashboardLayout from "../layouts/DashboardLayout";
+import About from "../pages/About/About";
+import AllTicket from "../pages/AllTicket/AllTicket";
 
 export const router = createBrowserRouter([
   {
@@ -34,11 +36,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <Home />,
+        element: <About />,
       },
       {
         path: "/ticket",
-        element: <Home />,
+        element: <AllTicket />,
       },
       {
         path: "/branches",
