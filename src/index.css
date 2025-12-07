@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark, cupcake, forest, cyberpunk;
+}
+.perspective-1000 {
+  perspective: 1000px;
+}
