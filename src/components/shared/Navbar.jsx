@@ -1,13 +1,12 @@
-import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { ClockLoader } from "react-spinners";
-import { AuthContext } from "../context/AuthContext";
 import Theme from "./Theme";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const { user, logOut, loading } = use(AuthContext);
+  const { user, logOut, loading } = useAuth();
 
   const handleLogout = () => {
     logOut()

@@ -1,10 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
-import { toast } from "react-hot-toast";
+
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
-import { imageUpload, saveOrUpdateUser } from "../../utils";
+import { imageUpload, saveOrUpdateUser } from "../../utils/imgUpload";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } =

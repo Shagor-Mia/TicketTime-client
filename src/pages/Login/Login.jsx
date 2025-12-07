@@ -1,10 +1,11 @@
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
-import toast from "react-hot-toast";
-import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+
+import LoadingSpinner from "../../components/shared/Spinner";
 import useAuth from "../../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { saveOrUpdateUser } from "../../utils";
+import { saveOrUpdateUser } from "../../utils/imgUpload";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user, setLoading } = useAuth();

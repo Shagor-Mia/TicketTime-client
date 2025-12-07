@@ -6,7 +6,7 @@ import { MdDirectionsBike, MdSportsMotorsports } from "react-icons/md";
 import { SiGoogletasks } from "react-icons/si";
 import { FaTasks, FaUser } from "react-icons/fa";
 import useRole from "../hooks/useRole";
-import logoImg from "../assets/logo.png";
+import logoImg from "../assets/bus1.png";
 
 const DashboardLayout = () => {
   const { role } = useRole();
