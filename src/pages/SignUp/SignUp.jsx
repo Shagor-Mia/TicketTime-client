@@ -1,232 +1,161 @@
-import { Link, useLocation, useNavigate } from "react-router";
-import { FcGoogle } from "react-icons/fc";
-import useAuth from "../../hooks/useAuth";
-
-import { TbFidgetSpinner } from "react-icons/tb";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { imageUpload, saveOrUpdateUser } from "../../utils/imgUpload";
-import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
+import useSecureAxios from "../../hooks/useSecureAxios";
+import { Link, useLocation, useNavigate } from "react-router";
+import GoogleLogin from "../GoogleLogin/GoogleLogin";
+import axios from "axios";
 
-const SignUp = () => {
-  const { createUser, updateUserProfile, signInWithGoogle, loading } =
-    useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state || "/";
-
-  // React Hook Form
+const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
-  const onSubmit = async (data) => {
-    const { name, image, email, password } = data;
-    const imageFile = image[0];
+  const { userRegister, updateRegisterUserProfile } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const axiosSecure = useSecureAxios();
 
-    try {
-      const imageURL = await imageUpload(imageFile);
+  // console.log("register location", location);
 
-      //1. User Registration
-      const result = await createUser(email, password);
+  const handleRegister = (data) => {
+    // console.log(data.photo[0]);
 
-      await saveOrUpdateUser({ name, email, image: imageURL });
+    const profileImage = data.photo[0];
+    userRegister(data.email, data.password)
+      .then((result) => {
+        // console.log(result.user);
 
-      // 2. Generate image url from selected file
+        // store data image url
+        const formData = new FormData();
+        formData.append("image", profileImage);
+        const img_URL = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMAGE_HOST
+        }`;
 
-      //3. Save username & profile photo
-      await updateUserProfile(name, imageURL);
+        axios.post(img_URL, formData).then((res) => {
+          // console.log("after response", res.data);
 
-      navigate(from, { replace: true });
-      toast.success("Signup Successful");
+          const photoURL = res.data.data.url;
 
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
-    }
+          // create user in the database
+          const userInfo = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user created in the database");
+            }
+          });
+
+          //update user profile
+          const userProfile = {
+            displayName: data.name,
+            photoURL: photoURL,
+          };
+          updateRegisterUserProfile(userProfile)
+            .then(() => {
+              console.log("user profile updated done.");
+              navigate(location?.state || "/");
+            })
+            .catch((err) => console.log(err));
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
-  // Handle Google Signin
-  const handleGoogleSignIn = async () => {
-    try {
-      //User Registration using google
-      const { user } = await signInWithGoogle();
-
-      await saveOrUpdateUser({
-        name: user?.displayName,
-        email: user?.email,
-        image: user?.photoURL,
-      });
-
-      navigate(from, { replace: true });
-      toast.success("Signup Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
-    }
-  };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
-        <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
-          <p className="text-sm text-gray-400">Welcome to PlantNet</p>
-        </div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate=""
-          action=""
-          className="space-y-6 ng-untouched ng-pristine ng-valid"
-        >
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block mb-2 text-sm">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
-                data-temp-mail-org="0"
-                {...register("name", {
-                  required: "Name is required",
-                  maxLength: {
-                    value: 20,
-                    message: "Name cannot be too long",
-                  },
-                })}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-            {/* Image */}
-            <div>
-              <label
-                htmlFor="image"
-                className="block mb-2 text-sm font-medium text-gray-700"
-              >
-                Profile Image
-              </label>
-              <input
-                name="image"
-                type="file"
-                id="image"
-                accept="image/*"
-                className="block w-full text-sm text-gray-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-md file:border-0
-      file:text-sm file:font-semibold
-      file:bg-lime-50 file:text-lime-700
-      hover:file:bg-lime-100
-      bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
-      focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
-      py-2"
-                {...register("image")}
-              />
-              <p className="mt-1 text-xs text-gray-400">
-                PNG, JPG or JPEG (max 2MB)
-              </p>
-            </div>
-            <div>
-              <label htmlFor="email" className="block mb-2 text-sm">
-                Email address
-              </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
-                data-temp-mail-org="0"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Please enter a valid email address.",
-                  },
-                })}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <div className="flex justify-between">
-                <label htmlFor="password" className="text-sm mb-2">
-                  Password
-                </label>
-              </div>
-              <input
-                type="password"
-                autoComplete="new-password"
-                id="password"
-                placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-              />
-              {errors.password && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-          </div>
+    <div className="card bg-base-100 mx-auto w-full max-w-sm shrink-0 shadow-2xl">
+      <h1 className="text-5xl font-bold text-center mt-5">Create Account</h1>
+      <p className="text-center text-xl font-semibold">With ZapShift</p>
+      <form onSubmit={handleSubmit(handleRegister)} className="card-body">
+        <fieldset className="fieldset">
+          {/*name  */}
+          <label className="label">Name</label>
+          <input
+            type="text"
+            {...register("name", { required: true })}
+            className="input"
+            placeholder="Your Name"
+          />
+          {errors.name?.type === "required" && (
+            <span className="text-red-500">Name is required!</span>
+          )}
+          {/* image upload */}
 
+          <label className="label">Photo</label>
+          <input
+            type="file"
+            {...register("photo", { required: true })}
+            className="file-input"
+            placeholder="Your photo"
+          />
+          {errors.photo?.type === "required" && (
+            <span className="text-red-500">Photo is required!</span>
+          )}
+          {/* email */}
+          <label className="label">Email</label>
+          <input
+            type="email"
+            {...register("email", { required: true })}
+            className="input"
+            placeholder="Email"
+          />
+          {errors.email?.type === "required" && (
+            <span className="text-red-500">Email is required!</span>
+          )}
+          {/*  */}
+          <label className="label">Password</label>
+          <input
+            type="password"
+            {...register("password", {
+              required: true,
+              minLength: 6,
+              pattern:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+            })}
+            className="input"
+            placeholder="Password"
+          />
+          {errors.password?.type === "required" && (
+            <span className="text-red-500">Password required</span>
+          )}
+          {errors.password?.type === "minLength" && (
+            <span className="text-red-500">
+              Password at least 6 character length!
+            </span>
+          )}
+          {errors.password?.type === "pattern" && (
+            <span className="text-red-500">
+              password At least one uppercase letter,At least one lowercase
+              letter,At least one number,At least one special character.
+            </span>
+          )}
           <div>
-            <button
-              type="submit"
-              className="bg-lime-500 w-full rounded-md py-3 text-white"
-            >
-              {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
-              ) : (
-                "Continue"
-              )}
-            </button>
+            <a className="link link-hover">Forgot password?</a>
           </div>
-        </form>
-        <div className="flex items-center pt-4 space-x-1">
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-          <p className="px-3 text-sm dark:text-gray-400">
-            Signup with social accounts
-          </p>
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-        </div>
-        <div
-          onClick={handleGoogleSignIn}
-          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
-        >
-          <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </div>
-        <p className="px-6 text-sm text-center text-gray-400">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="hover:underline hover:text-lime-500 text-gray-600"
-          >
-            Login
-          </Link>
-          .
+          <button className="btn btn-neutral mt-4">Register</button>
+        </fieldset>
+        <p>
+          Already have an Account?{" "}
+          <span>
+            <Link
+              state={location.state}
+              to={"/login"}
+              className="text-blue-600 underline"
+            >
+              Login
+            </Link>
+          </span>
         </p>
-      </div>
+      </form>
+      <GoogleLogin />
     </div>
   );
 };
 
-export default SignUp;
+export default Register;

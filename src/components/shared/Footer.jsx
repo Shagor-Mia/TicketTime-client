@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
+import bus from "../../assets/bus1.png";
 
 const Footer = () => {
   return (
@@ -8,9 +9,9 @@ const Footer = () => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full bg-base-300  px-5"
+      className="w-full bg-base-300 py-10 px-5"
     >
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:justify-between gap-8">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-8 px-10">
         {/* Brand + Copyright */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -23,16 +24,16 @@ const Footer = () => {
               whileHover={{ rotate: 10 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="w-10"
-              src="https://i.ibb.co.com/Y4Wb7HvM/homelogo4.png"
+              src={bus}
               alt="logo"
             />
             <h2 className="text-xl font-semibold bg-linear-to-br from-[#632ee3] to-[#9f62f2] bg-clip-text text-transparent">
-              HomeHero
+              TicketTime
             </h2>
           </Link>
           <p className="mt-3 text-center md:text-left text-sm">
-            © {new Date().getFullYear()} HomeHero - Local Household Service
-            Finder. All rights reserved.
+            © {new Date().getFullYear()} TicketTime - An Online Ticket Booking.
+            All rights reserved.
           </p>
         </motion.div>
 
@@ -43,14 +44,14 @@ const Footer = () => {
           transition={{ delay: 0.2, duration: 0.4 }}
           className="flex flex-col items-center md:items-start"
         >
-          <h3 className="font-semibold text-lg mb-2 text-white">Contact Us</h3>
+          <h3 className="font-semibold text-lg mb-2 ">Contact Us</h3>
           <p>
             Email:{" "}
             <a
               href="mailto:home@heroservice.com"
               className="hover:text-[#9f62f2]"
             >
-              home@heroservice.com
+              ticket@time.com
             </a>
           </p>
           <p>
@@ -69,7 +70,7 @@ const Footer = () => {
           transition={{ delay: 0.3, duration: 0.4 }}
           className="flex flex-col items-center md:items-start"
         >
-          <h3 className="font-semibold text-lg mb-2 text-white">Quick Links</h3>
+          <h3 className="font-semibold text-lg mb-2 ">Quick Links</h3>
           <Link to="/" className="hover:text-[#9f62f2]">
             Privacy Policy
           </Link>
@@ -88,7 +89,7 @@ const Footer = () => {
           transition={{ delay: 0.4, duration: 0.4 }}
           className="flex flex-col items-center md:items-start"
         >
-          <h3 className="font-semibold text-lg mb-3 text-white">Follow Us</h3>
+          <h3 className="font-semibold text-lg mb-3 ">Follow Us</h3>
           <div className="flex gap-4">
             {[
               {

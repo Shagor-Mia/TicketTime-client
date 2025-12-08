@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ClockLoader } from "react-spinners";
 import Theme from "./Theme";
 import useAuth from "../../hooks/useAuth";
+import plan from "../../assets/plane-removebg-preview.png";
 
 const Navbar = () => {
   const { user, logOut, loading } = useAuth();
@@ -21,7 +22,7 @@ const Navbar = () => {
 
   const linkActive = ({ isActive }) =>
     isActive
-      ? "relative bg-gradient-to-br from-[#632ee3] to-[#9f62f2] bg-clip-text text-transparent font-semibold after:content-[''] after:absolute after:left-0 after:-bottom-0 after:w-0 after:h-[2px] after:bg-gradient-to-br after:from-[#632ee3] after:to-[#9f62f2] after:transition-all after:duration-300 after:w-full"
+      ? "relative bg-gradient-to-br from-[#632ee3] to-[#9f62f2] bg-clip-text text-transparent font-semibold"
       : "";
 
   const link = (
@@ -65,7 +66,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="max-w-7xl w-full mx-auto flex justify-between items-center py-3 px-4 md:px-8 lg:px-12">
+      <div className="max-w-7xl w-full mx-auto flex justify-between items-center py-3 px-4 md:px-8 lg:px-10">
         {/* Left Section */}
         <motion.div
           className="flex justify-center items-center"
@@ -106,8 +107,8 @@ const Navbar = () => {
             <motion.img
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="hidden md:block w-10"
-              src="https://i.ibb.co.com/VWGVLPFx/homelogo1.png"
+              className="hidden md:block w-20"
+              src={plan}
               alt="logo"
             />
           </Link>
@@ -116,7 +117,7 @@ const Navbar = () => {
             to={"/"}
             className="text-2xl bg-linear-to-br from-[#632ee3] to-[#9f62f2] bg-clip-text text-transparent font-semibold hidden md:block"
           >
-            HomeHero
+            TicketTime
           </Link>
         </motion.div>
 

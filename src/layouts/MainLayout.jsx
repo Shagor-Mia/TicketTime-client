@@ -7,10 +7,10 @@ import Footer from "../components/shared/Footer";
 const MainLayout = () => {
   const { state } = useNavigation();
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="pt-24 min-h-[calc(100vh-68px)]">
-        {state == "loading" ? <LoadingPage /> : <Outlet />}
+      <div className="max-w-screen-xl mx-auto w-screen px-5 md:px-9 lg:px-13  flex-1 bg-[#f5f5f5] ">
+        {state == "loading" ? <Loading /> : <Outlet />}
       </div>
       <Footer />
     </div>

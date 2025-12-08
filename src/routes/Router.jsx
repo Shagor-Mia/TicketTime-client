@@ -22,6 +22,8 @@ import ManageOrders from "../pages/Dashboard/Vendors/ManageOrders";
 import DashboardLayout from "../layouts/DashboardLayout";
 import About from "../pages/About/About";
 import AllTicket from "../pages/AllTicket/AllTicket";
+import Statistics from "../pages/Dashboard/Common/Statistics";
+import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +71,10 @@ export const router = createBrowserRouter([
         path: "signup",
         Component: SignUp,
       },
+      {
+        path: "forget-password",
+        Component: ForgetPassword,
+      },
     ],
   },
   // dashboard
@@ -88,6 +94,7 @@ export const router = createBrowserRouter([
           </PrivateRouter>
         ),
       },
+      // vendors
       {
         path: "add-ticket",
         element: (
@@ -116,6 +123,7 @@ export const router = createBrowserRouter([
           </PrivateRouter>
         ),
       },
+      // admin
       {
         path: "manage-users",
         element: (
@@ -126,16 +134,8 @@ export const router = createBrowserRouter([
           </PrivateRouter>
         ),
       },
-      // {
-      //   path: "seller-requests",
-      //   element: (
-      //     <PrivateRouter>
-      //       <AdminRouter>
-      //         <SellerRequests />
-      //       </AdminRouter>
-      //     </PrivateRouter>
-      //   ),
-      // },
+
+      // users
       {
         path: "profile",
         element: (
