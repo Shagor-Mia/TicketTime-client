@@ -24,6 +24,8 @@ import About from "../pages/About/About";
 import AllTicket from "../pages/AllTicket/AllTicket";
 import Statistics from "../pages/Dashboard/Common/Statistics";
 import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import ApproveVendors from "../pages/Dashboard/Admin/ApproveVendors";
 
 export const router = createBrowserRouter([
   {
@@ -88,11 +90,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <PrivateRouter>
-            <Statistics />
-          </PrivateRouter>
-        ),
+        Component: DashboardHome,
       },
       // vendors
       {
@@ -130,6 +128,16 @@ export const router = createBrowserRouter([
           <PrivateRouter>
             <AdminRouter>
               <ManageUsers />
+            </AdminRouter>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "approve-vendors",
+        element: (
+          <PrivateRouter>
+            <AdminRouter>
+              <ApproveVendors />
             </AdminRouter>
           </PrivateRouter>
         ),

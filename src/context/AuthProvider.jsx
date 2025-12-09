@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
-    signOut(auth);
+    return signOut(auth);
   };
   const updateRegisterUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);

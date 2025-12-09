@@ -1,210 +1,171 @@
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
-import { CiDeliveryTruck } from "react-icons/ci";
-import { FaCreditCard } from "react-icons/fa6";
-import { MdDirectionsBike, MdSportsMotorsports } from "react-icons/md";
+import { LuTicketsPlane } from "react-icons/lu";
+import { CgProfile } from "react-icons/cg";
 import { SiGoogletasks } from "react-icons/si";
-import { FaTasks, FaUser } from "react-icons/fa";
+import { FaTasks, FaUser, FaUserCheck } from "react-icons/fa";
+import { AiOutlineHome } from "react-icons/ai";
+import { FiSettings } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
+import { HiMenuAlt2 } from "react-icons/hi";
 import useRole from "../hooks/useRole";
 import logoImg from "../assets/bus1.png";
+import Navbar from "../components/shared/Navbar";
+// import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
   const { role } = useRole();
-  // console.log("user Role", role);
+  // const { logOut } = useAuth();
+
+  // Common links for all users
+  const commonLinks = [
+    {
+      to: "/dashboard/my-orders",
+      label: "My Tickets",
+      icon: <LuTicketsPlane />,
+      tip: "My Tickets",
+    },
+    {
+      to: "/dashboard/profile",
+      label: "My Profile",
+      icon: <CgProfile />,
+      tip: "My Profile",
+    },
+  ];
+
+  // Vendor only links
+  const vendorLinks = [
+    {
+      to: "/dashboard/add-tickets",
+      label: "Add Tickets",
+      icon: <FaTasks />,
+      tip: "Add Tickets",
+    },
+    {
+      to: "/dashboard/manage-orders",
+      label: "Manage Orders",
+      icon: <FaTasks />,
+      tip: "Manage Orders",
+    },
+    {
+      to: "/dashboard/my-inventory",
+      label: "My Inventory",
+      icon: <SiGoogletasks />,
+      tip: "My Inventory",
+    },
+  ];
+
+  // Admin only links
+  const adminLinks = [
+    {
+      to: "/dashboard/approve-vendors",
+      label: "Approve Vendors",
+      icon: <FaUserCheck />,
+      tip: "Approve Vendors",
+    },
+    {
+      to: "/dashboard/manage-users",
+      label: "User Management",
+      icon: <FaUser />,
+      tip: "User Management",
+    },
+  ];
+
+  // Final menu items
+  const menuItems = [
+    ...commonLinks,
+    ...(role === "vendor" ? vendorLinks : []),
+    ...(role === "admin" ? adminLinks : []),
+  ];
+
   return (
-    <div className="drawer lg:drawer-open max-w-7xl mx-auto">
-      <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
-        {/* Navbar */}
-        <nav className="navbar w-full bg-base-300">
-          <label
-            htmlFor="my-drawer-4"
-            aria-label="open sidebar"
-            className="btn btn-square btn-ghost"
-          >
-            {/* Sidebar toggle icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2"
-              fill="none"
-              stroke="currentColor"
-              className="my-1.5 inline-block size-4"
+    <>
+      <Navbar />
+
+      <div className="drawer lg:drawer-open max-w-7xl mx-auto">
+        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+
+        {/* Page content */}
+        <div className="drawer-content">
+          <nav className="navbar w-full ">
+            {/* Drawer Toggle Button */}
+            <label
+              htmlFor="my-drawer-4"
+              aria-label="open sidebar"
+              className="btn btn-square btn-ghost"
             >
-              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-              <path d="M9 4v16"></path>
-              <path d="M14 10l2 2l-2 2"></path>
-            </svg>
-          </label>
-          <div className="px-4">ZapShift Dashboard</div>
-        </nav>
-        {/* Page content here */}
-        <Outlet />
-      </div>
+              <HiMenuAlt2 className="size-6" />
+            </label>
 
-      <div className="drawer-side is-drawer-close:overflow-visible">
-        <label
-          htmlFor="my-drawer-4"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-          {/* Sidebar content here */}
-          <ul className="menu w-full grow">
-            {/* List item */}
-            <li>
-              <Link to={"/"}>
-                <img src={logoImg} alt="" />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/dashboard"}
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Homepage"
-              >
-                {/* Home icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
-                >
-                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                </svg>
-                <span className="is-drawer-close:hidden">Homepage</span>
-              </Link>
-            </li>
-            {/* our dashboard links */}
-            <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="MyParcels"
-                to={"/dashboard/my-parcels"}
-              >
-                <CiDeliveryTruck />
-                <span className="is-drawer-close:hidden">My Parcels</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="PaymentHistory"
-                to={"/dashboard/payment-history"}
-              >
-                <FaCreditCard />
-                <span className="is-drawer-close:hidden">
-                  My Payment History
-                </span>
-              </NavLink>
-            </li>
-            {/* rider only */}
-            {role === "rider" && (
-              <>
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Assigned Deliveries"
-                    to={"/dashboard/assigned-deliveries"}
-                  >
-                    <FaTasks />
-                    <span className="is-drawer-close:hidden">
-                      Assigned Deliveries
-                    </span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Completed Deliveries"
-                    to={"/dashboard/completed-deliveries"}
-                  >
-                    <SiGoogletasks />
-                    <span className="is-drawer-close:hidden">
-                      Completed Deliveries
-                    </span>
-                  </NavLink>
-                </li>
-              </>
-            )}
-            {/* admin only */}
-            {role === "admin" && (
-              <>
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Approve-Rider"
-                    to={"/dashboard/approve-rider"}
-                  >
-                    <MdDirectionsBike />
-                    <span className="is-drawer-close:hidden">
-                      Approve Riders
-                    </span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Assign-Rider"
-                    to={"/dashboard/assign-rider"}
-                  >
-                    <MdSportsMotorsports />
-                    <span className="is-drawer-close:hidden">
-                      Assign Riders
-                    </span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Users"
-                    to={"/dashboard/users-management"}
-                  >
-                    <FaUser />
-                    <span className="is-drawer-close:hidden">
-                      User Management
-                    </span>
-                  </NavLink>
-                </li>
-              </>
-            )}
-            {/* List item */}
+            <div className="px-4">TicketTime Dashboard</div>
+          </nav>
 
-            <li>
-              <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Settings"
-              >
-                {/* Settings icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
+          <Outlet />
+        </div>
+
+        {/* Sidebar */}
+        <div className="drawer-side is-drawer-close:overflow-visible">
+          <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+
+          <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
+            <ul className="menu w-full flex-col md:gap-5 grow">
+              {/* Logo */}
+              <li>
+                <Link to={"/"}>
+                  <img src={logoImg} alt="Logo" />
+                </Link>
+              </li>
+
+              {/* Homepage */}
+              <li>
+                <Link
+                  to={"/dashboard"}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Homepage"
                 >
-                  <path d="M20 7h-9"></path>
-                  <path d="M14 17H5"></path>
-                  <circle cx="17" cy="17" r="3"></circle>
-                  <circle cx="7" cy="7" r="3"></circle>
-                </svg>
-                <span className="is-drawer-close:hidden">Settings</span>
-              </button>
-            </li>
-          </ul>
+                  <AiOutlineHome className="is-drawer-open:text-[20px] is-drawer-close:text-[18px]" />
+                  <span className="is-drawer-open:text-[20px] is-drawer-close:hidden">
+                    Homepage
+                  </span>
+                </Link>
+              </li>
+
+              {/* Dynamic Menu */}
+              {menuItems.map((item, i) => (
+                <li key={i}>
+                  <NavLink
+                    to={item.to}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip={item.tip}
+                  >
+                    <span className="is-drawer-open:text-[20px] is-drawer-close:text-[18px]">
+                      {item.icon}
+                    </span>
+                    <span className="is-drawer-open:text-[20px] is-drawer-close:hidden">
+                      {item.label}
+                    </span>
+                  </NavLink>
+                </li>
+              ))}
+
+              {/* logout */}
+              {/* <li>
+                <button
+                  onClick={logOut}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Log out"
+                >
+                  <FiLogOut className="is-drawer-open:text-[20px] is-drawer-close:text-[18px]" />
+                  <span className="is-drawer-open:text-[20px] is-drawer-close:hidden">
+                    Logout
+                  </span>
+                </button>
+              </li> */}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

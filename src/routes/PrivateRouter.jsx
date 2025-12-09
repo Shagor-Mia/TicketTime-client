@@ -3,7 +3,7 @@ import React from "react";
 import { Navigate, useLocation } from "react-router";
 import useAuth from "../hooks/useAuth";
 
-const PrivateRoute = ({ children }) => {
+const PrivateRouter = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
   // console.log(location);
@@ -16,9 +16,9 @@ const PrivateRoute = ({ children }) => {
     );
   }
   if (!user) {
-    return <Navigate to={"/login"} state={location.pathname} />;
+    return <Navigate to={"/login"} state={location.pathname} replace="true" />;
   }
   return <div>{children}</div>;
 };
 
-export default PrivateRoute;
+export default PrivateRouter;

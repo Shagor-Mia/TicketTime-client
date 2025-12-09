@@ -52,7 +52,7 @@ const Navbar = () => {
         <>
           <li className=" mx-2">
             <NavLink className={linkActive} to={"/dashboard"}>
-              My Service
+              dashboard
             </NavLink>
           </li>
         </>
