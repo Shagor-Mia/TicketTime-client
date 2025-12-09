@@ -26,6 +26,7 @@ import Statistics from "../pages/Dashboard/Common/Statistics";
 import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import ApproveVendors from "../pages/Dashboard/Admin/ApproveVendors";
+import Branch from "../pages/Branch/Branch";
 
 export const router = createBrowserRouter([
   {
@@ -47,8 +48,8 @@ export const router = createBrowserRouter([
         element: <AllTicket />,
       },
       {
-        path: "/branches",
-        element: <Home />,
+        path: "/branch",
+        element: <Branch />,
       },
       {
         path: "/ticket/:id",

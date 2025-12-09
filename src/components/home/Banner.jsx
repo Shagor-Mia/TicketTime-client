@@ -28,7 +28,7 @@ const AnimatedBannerSwiper = () => {
       >
         {banners.map((img, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-full">
+            <div className="relative w-full md:max-h-[500px]">
               {/* Background Image */}
               <img
                 src={img}
