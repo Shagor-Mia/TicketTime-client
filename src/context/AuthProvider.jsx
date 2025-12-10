@@ -36,8 +36,17 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+
   const updateRegisterUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
+  };
+
+  const updateUserProfile = (profileName, photoUri) => {
+    setLoading(true);
+    return updateProfile(auth.currentUser, {
+      displayName: profileName,
+      photoURL: photoUri,
+    });
   };
   //   reset password
   const resetPassword = (email) => {
@@ -64,6 +73,7 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     logOut,
     updateRegisterUserProfile,
+    updateUserProfile,
     resetPassword,
   };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
