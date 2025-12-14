@@ -110,9 +110,7 @@ const ApproveVendors = () => {
                   {vendor.status}
                 </td>
                 <td>{vendor.workStatus}</td>
-                <td>
-                  {vendor.district}, {vendor.region}
-                </td>
+                <td>{vendor.location}</td>
                 <td>
                   <button onClick={() => viewVendor(vendor)} className="btn">
                     <FaEye />

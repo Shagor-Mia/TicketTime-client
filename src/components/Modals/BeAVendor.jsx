@@ -26,6 +26,7 @@ const locations = [
   { name: "Jessore", type: "bus/train" },
   { name: "Mymensingh", type: "bus/train" },
 ];
+const tickets = ["Air Ticket, Plane", "Train Ticket", "Bus Ticket"];
 
 const BeAVendorModal = ({ user }) => {
   const axiosSecure = useSecureAxios();
@@ -135,6 +136,19 @@ const BeAVendorModal = ({ user }) => {
                     {locations.map((loc, idx) => (
                       <option key={idx} value={loc.name}>
                         {loc.name}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    {...register("sellerType", { required: true })}
+                    className="select w-full"
+                  >
+                    <option disabled value="">
+                      Select Ticket Type
+                    </option>
+                    {tickets.map((tic, idx) => (
+                      <option key={idx} value={tic}>
+                        {tic}
                       </option>
                     ))}
                   </select>

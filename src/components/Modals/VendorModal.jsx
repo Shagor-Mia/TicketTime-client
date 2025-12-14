@@ -44,14 +44,12 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
                 <strong>NID:</strong> {vendor.NID}
               </p>
               <p>
-                <strong>Driving License:</strong> {vendor.drivingLicense}
+                <strong>Driving License:</strong> {vendor.sellerLicense}
               </p>
               <p>
-                <strong>District:</strong> {vendor.district}
+                <strong>Location:</strong> {vendor.location}
               </p>
-              <p>
-                <strong>Region:</strong> {vendor.region}
-              </p>
+
               <p>
                 <strong>Status:</strong> {vendor.status}
               </p>
