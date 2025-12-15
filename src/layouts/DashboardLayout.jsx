@@ -43,9 +43,9 @@ const DashboardLayout = () => {
     },
     {
       to: "/dashboard/manage-orders",
-      label: "Manage Orders",
+      label: "Manage Bookings",
       icon: <FaTasks />,
-      tip: "Manage Orders",
+      tip: "Manage Bookings",
     },
     {
       to: "/dashboard/my-inventory",

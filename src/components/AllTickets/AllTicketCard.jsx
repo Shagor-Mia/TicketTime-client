@@ -7,6 +7,8 @@ const AllTicketCard = ({ ticket }) => {
   const isExpired = new Date(ticket.departure) < new Date();
   const outOfStock = ticket.quantity === 0;
 
+  const departureDate = new Date(ticket.departure);
+
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
       <div className="rounded-2xl overflow-hidden shadow-md bg-white">
@@ -17,9 +19,25 @@ const AllTicketCard = ({ ticket }) => {
           <p className="text-gray-600">
             {ticket.from} → {ticket.to}
           </p>
-          <p className="text-sm">Transport: {ticket.type}</p>
+          <p className="text-sm">Transport: {ticket.transportType}</p>
           <p className="font-semibold">৳ {ticket.price}</p>
           <p className="text-sm">Available: {ticket.quantity}</p>
+
+          {/* Departure date and time */}
+          <p className="text-sm text-gray-700">
+            Departure:{" "}
+            {departureDate.toLocaleDateString(undefined, {
+              weekday: "short",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}{" "}
+            at{" "}
+            {departureDate.toLocaleTimeString(undefined, {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
 
           <div className="flex gap-2 flex-wrap text-xs text-gray-500">
             {ticket.perks.map((p, idx) => (
@@ -45,4 +63,5 @@ const AllTicketCard = ({ ticket }) => {
     </motion.div>
   );
 };
+
 export default AllTicketCard;
