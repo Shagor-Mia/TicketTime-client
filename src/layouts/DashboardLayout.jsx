@@ -64,6 +64,12 @@ const DashboardLayout = () => {
       tip: "Approve Vendors",
     },
     {
+      to: "/dashboard/approve-ticket",
+      label: "Approve Ticket",
+      icon: <FaUserCheck />,
+      tip: "Approve Tickets",
+    },
+    {
       to: "/dashboard/manage-users",
       label: "User Management",
       icon: <FaUser />,

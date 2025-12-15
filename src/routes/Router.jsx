@@ -27,6 +27,7 @@ import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import ApproveVendors from "../pages/Dashboard/Admin/ApproveVendors";
 import Branch from "../pages/Branch/Branch";
+import ApprovedTicket from "../pages/Dashboard/Admin/ApprovedTicket";
 
 export const router = createBrowserRouter([
   {
@@ -95,10 +96,12 @@ export const router = createBrowserRouter([
       },
       // vendors
       {
-        path: "add-ticket",
+        path: "add-tickets",
         element: (
           <PrivateRouter>
-            <AddTickets />
+            <VendorRouter>
+              <AddTickets />
+            </VendorRouter>
           </PrivateRouter>
         ),
       },
@@ -139,6 +142,16 @@ export const router = createBrowserRouter([
           <PrivateRouter>
             <AdminRouter>
               <ApproveVendors />
+            </AdminRouter>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "approve-ticket",
+        element: (
+          <PrivateRouter>
+            <AdminRouter>
+              <ApprovedTicket />
             </AdminRouter>
           </PrivateRouter>
         ),
