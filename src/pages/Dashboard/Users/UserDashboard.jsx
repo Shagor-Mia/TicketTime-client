@@ -6,7 +6,7 @@ import TransactionHistory from "../../../components/Bookings/TransactionHistory"
 const UserDashboard = () => {
   const { user } = useAuth();
   return (
-    <div className="p-10">
+    <div className="md:p-10">
       {/* Be a seller modal button */}
       <BeAVendorModal user={user} />
       <TransactionHistory user={user} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import useSecureAxios from "../../hooks/useSecureAxios";
 
@@ -8,22 +8,19 @@ const PaymentSuccess = () => {
   const [paymentInfo, setPaymentInfo] = useState(null);
 
   const sessionId = searchParams.get("session_id");
-  const bookingId = searchParams.get("bookingId");
 
   useEffect(() => {
-    if (sessionId && bookingId) {
+    if (sessionId) {
       axiosSecure
-        .patch(
-          `/payment-success?session_id=${sessionId}&bookingId=${bookingId}`
-        )
+        .patch(`/payment-success?session_id=${sessionId}`)
         .then((res) => {
           setPaymentInfo({
             transactionId: res.data.transactionId,
-            // trackingId: res.data.trackingId,
           });
-        });
+        })
+        .catch(console.error);
     }
-  }, [sessionId, bookingId, axiosSecure]);
+  }, [sessionId, axiosSecure]);
 
   if (!paymentInfo) return <p>Loading payment info...</p>;
 
@@ -33,7 +30,6 @@ const PaymentSuccess = () => {
         Payment Successful ✅
       </h2>
       <p className="mt-4">Transaction ID: {paymentInfo.transactionId}</p>
-      {/* <p>Tracking ID: {paymentInfo.trackingId}</p> */}
     </div>
   );
 };

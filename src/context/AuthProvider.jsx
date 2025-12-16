@@ -32,9 +32,16 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const logOut = () => {
+  // const logOut = () => {
+  //   setLoading(true);
+  //   return signOut(auth);
+  // };
+
+  const logOut = async () => {
     setLoading(true);
-    return signOut(auth);
+    return signOut(auth)
+      .then(() => setUser(null))
+      .finally(() => setLoading(false));
   };
 
   const updateRegisterUserProfile = (profile) => {

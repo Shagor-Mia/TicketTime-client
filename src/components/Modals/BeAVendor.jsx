@@ -67,7 +67,7 @@ const BeAVendorModal = ({ user }) => {
   };
 
   return (
-    <>
+    <div className="max-w-6xl mx-auto p-6">
       {/* Trigger Button */}
       <motion.button
         onClick={openModal}
@@ -187,7 +187,7 @@ const BeAVendorModal = ({ user }) => {
           </dialog>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 

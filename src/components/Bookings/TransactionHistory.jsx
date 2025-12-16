@@ -39,13 +39,15 @@ const TransactionHistory = ({ user }) => {
       animate={{ opacity: 1, y: 0 }}
       className="max-w-6xl mx-auto p-6"
     >
-      <h2 className="text-2xl font-bold mb-6">Transaction History</h2>
+      <h2 className="text-2xl font-bold mb-6">
+        Transaction History({transactions.length})
+      </h2>
 
       {transactions.length === 0 ? (
         <p>No transactions found.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="table w-full border">
+          <table className="table w-full">
             <thead className="bg-gray-100">
               <tr>
                 <th>#</th>

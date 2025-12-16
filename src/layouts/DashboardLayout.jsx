@@ -1,89 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import { LuTicketsPlane } from "react-icons/lu";
+import { AiOutlineHome } from "react-icons/ai";
+
 import { CgProfile } from "react-icons/cg";
 import { SiGoogletasks } from "react-icons/si";
 import { FaTasks, FaUser, FaUserCheck } from "react-icons/fa";
-import { AiOutlineHome } from "react-icons/ai";
-import { FiSettings } from "react-icons/fi";
-import { FiLogOut } from "react-icons/fi";
 import { HiMenuAlt2 } from "react-icons/hi";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
 import useRole from "../hooks/useRole";
-import logoImg from "../assets/bus1.png";
 import Navbar from "../components/shared/Navbar";
-// import useAuth from "../hooks/useAuth";
+import logoImg from "../assets/bus1.png";
 
 const DashboardLayout = () => {
   const { role } = useRole();
-  // const { logOut } = useAuth();
+  const [collapsed, setCollapsed] = useState(false);
 
-  // Common links for all users
+  const closeDrawer = () => {
+    const checkbox = document.getElementById("dashboard-drawer");
+    if (checkbox) checkbox.checked = false;
+  };
+
   const commonLinks = [
+    { to: "/dashboard", label: "Dashboard", icon: <AiOutlineHome /> },
     {
       to: "/dashboard/my-orders",
       label: "My Tickets",
       icon: <LuTicketsPlane />,
-      tip: "My Tickets",
     },
-    {
-      to: "/dashboard/profile",
-      label: "My Profile",
-      icon: <CgProfile />,
-      tip: "My Profile",
-    },
+    { to: "/dashboard/profile", label: "Profile", icon: <CgProfile /> },
   ];
 
-  // Vendor only links
   const vendorLinks = [
-    {
-      to: "/dashboard/add-tickets",
-      label: "Add Tickets",
-      icon: <FaTasks />,
-      tip: "Add Tickets",
-    },
+    { to: "/dashboard/add-tickets", label: "Add Tickets", icon: <FaTasks /> },
     {
       to: "/dashboard/manage-orders",
-      label: "Manage Bookings",
+      label: "Manage Orders",
       icon: <FaTasks />,
-      tip: "Manage Bookings",
     },
     {
       to: "/dashboard/my-added-tickets",
-      label: "My Added Tickets",
+      label: "My Tickets",
       icon: <SiGoogletasks />,
-      tip: "My Added Tickets",
     },
-    {
-      to: "/dashboard/revenue",
-      label: "Revenue Overview",
-      icon: <SiGoogletasks />,
-      tip: "Revenue Overview",
-    },
+    { to: "/dashboard/revenue", label: "Revenue", icon: <SiGoogletasks /> },
   ];
 
-  // Admin only links
   const adminLinks = [
     {
       to: "/dashboard/approve-vendors",
       label: "Approve Vendors",
       icon: <FaUserCheck />,
-      tip: "Approve Vendors",
     },
     {
       to: "/dashboard/approve-ticket",
-      label: "Approve Ticket",
+      label: "Approve Tickets",
       icon: <FaUserCheck />,
-      tip: "Approve Tickets",
     },
-    {
-      to: "/dashboard/manage-users",
-      label: "User Management",
-      icon: <FaUser />,
-      tip: "User Management",
-    },
+    { to: "/dashboard/manage-users", label: "Users", icon: <FaUser /> },
   ];
 
-  // Final menu items
   const menuItems = [
     ...commonLinks,
     ...(role === "vendor" ? vendorLinks : []),
@@ -92,89 +69,90 @@ const DashboardLayout = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="drawer lg:drawer-open max-w-7xl mx-auto">
-        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+        <input
+          id="dashboard-drawer"
+          type="checkbox"
+          className="drawer-toggle"
+        />
 
-        {/* Page content */}
-        <div className="drawer-content">
-          <nav className="navbar w-full ">
-            {/* Drawer Toggle Button */}
+        {/* ================= CONTENT ================= */}
+        <div className="drawer-content flex flex-col">
+          {/* Top Bar */}
+          <nav className="navbar bg-base-100 sticky top-0 z-20 shadow-sm">
             <label
-              htmlFor="my-drawer-4"
-              aria-label="open sidebar"
-              className="btn btn-square btn-ghost"
+              htmlFor="dashboard-drawer"
+              className="btn btn-ghost btn-square lg:hidden"
             >
-              <HiMenuAlt2 className="size-6" />
+              <HiMenuAlt2 className="text-xl" />
             </label>
 
-            <div className="px-4">TicketTime Dashboard</div>
+            <h2 className="text-lg sm:text-2xl font-bold truncate flex justify-between items-center">
+              Dashboard <span className="text-green-600">({role})</span>
+              <span className="lg:hidden block">
+                <Link to="/" className="flex items-center gap-2">
+                  <img src={logoImg} className="h-10" alt="Logo" />
+                </Link>
+              </span>
+            </h2>
           </nav>
 
-          <Outlet />
+          <div className="md:p-4">
+            <Outlet />
+          </div>
         </div>
 
-        {/* Sidebar */}
-        <div className="drawer-side is-drawer-close:overflow-visible">
-          <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+        {/* ================= SIDEBAR ================= */}
+        <div className="drawer-side">
+          <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
 
-          <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-            <ul className="menu w-full flex-col md:gap-5 grow">
-              {/* Logo */}
-              <li>
-                <Link to={"/"}>
-                  <img src={logoImg} alt="Logo" />
-                </Link>
-              </li>
+          <aside
+            className={`bg-base-200 min-h-full transition-all duration-300
+              ${collapsed ? "w-20" : "w-64"}
+            `}
+          >
+            {/* Logo */}
+            <div className="flex items-center justify-between px-4 py-4">
+              <Link to="/" className="flex items-center gap-2">
+                <img src={logoImg} className="h-10" alt="Logo" />
+                {!collapsed && (
+                  <span className="font-bold text-lg">TicketTime</span>
+                )}
+              </Link>
 
-              {/* Homepage */}
-              <li>
-                <Link
-                  to={"/dashboard"}
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Homepage"
-                >
-                  <AiOutlineHome className="is-drawer-open:text-[20px] is-drawer-close:text-[18px]" />
-                  <span className="is-drawer-open:text-[20px] is-drawer-close:hidden">
-                    Homepage
-                  </span>
-                </Link>
-              </li>
+              {/* Collapse button (desktop only) */}
+              <button
+                onClick={() => setCollapsed(!collapsed)}
+                className="hidden md:flex btn btn-ghost btn-sm"
+              >
+                {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
+              </button>
+            </div>
 
-              {/* Dynamic Menu */}
+            {/* Menu */}
+            <ul className="menu px-2 gap-1">
               {menuItems.map((item, i) => (
                 <li key={i}>
                   <NavLink
                     to={item.to}
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip={item.tip}
+                    onClick={closeDrawer}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 ${
+                        isActive
+                          ? "bg-green-100 text-green-700 font-semibold"
+                          : ""
+                      }`
+                    }
                   >
-                    <span className="is-drawer-open:text-[20px] is-drawer-close:text-[18px]">
-                      {item.icon}
-                    </span>
-                    <span className="is-drawer-open:text-[20px] is-drawer-close:hidden">
-                      {item.label}
-                    </span>
+                    <span className="text-lg">{item.icon}</span>
+                    {!collapsed && <span>{item.label}</span>}
                   </NavLink>
                 </li>
               ))}
-
-              {/* logout */}
-              {/* <li>
-                <button
-                  onClick={logOut}
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Log out"
-                >
-                  <FiLogOut className="is-drawer-open:text-[20px] is-drawer-close:text-[18px]" />
-                  <span className="is-drawer-open:text-[20px] is-drawer-close:hidden">
-                    Logout
-                  </span>
-                </button>
-              </li> */}
             </ul>
-          </div>
+          </aside>
         </div>
       </div>
     </>

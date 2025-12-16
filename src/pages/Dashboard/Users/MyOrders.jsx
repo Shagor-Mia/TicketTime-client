@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import MyBookedTicketCard from "../../../components/Bookings/MyBookedTicketCard";
+import LoadingSpinner from "../../../components/shared/Spinner";
 
 const MyOrders = () => {
   const axiosSecure = useSecureAxios();
@@ -13,16 +14,10 @@ const MyOrders = () => {
     },
   });
 
-  if (isLoading) {
-    return (
-      <div className="text-center py-10 text-xl font-semibold">
-        Loading your bookings...
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
       <h2 className="text-3xl font-bold mb-6">My Booked Tickets</h2>
 
       {bookings.length === 0 ? (

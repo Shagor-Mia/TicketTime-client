@@ -68,6 +68,7 @@ const TicketDetails = () => {
       ticketId: ticket._id,
       ticketTitle: ticket.title,
       ticketImage: ticket.image,
+      transportType: ticket.transportType,
 
       from: ticket.from,
       to: ticket.to,

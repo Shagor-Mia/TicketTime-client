@@ -99,31 +99,25 @@ export const router = createBrowserRouter([
       {
         path: "add-tickets",
         element: (
-          <PrivateRouter>
-            <VendorRouter>
-              <AddTickets />
-            </VendorRouter>
-          </PrivateRouter>
+          <VendorRouter>
+            <AddTickets />
+          </VendorRouter>
         ),
       },
       {
         path: "my-added-tickets",
         element: (
-          <PrivateRouter>
-            <VendorRouter>
-              <MyAddedTickets />
-            </VendorRouter>
-          </PrivateRouter>
+          <VendorRouter>
+            <MyAddedTickets />
+          </VendorRouter>
         ),
       },
       {
         path: "manage-orders",
         element: (
-          <PrivateRouter>
-            <VendorRouter>
-              <ManageOrders />
-            </VendorRouter>
-          </PrivateRouter>
+          <VendorRouter>
+            <ManageOrders />
+          </VendorRouter>
         ),
       },
       {
