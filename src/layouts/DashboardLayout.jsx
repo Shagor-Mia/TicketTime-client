@@ -48,10 +48,16 @@ const DashboardLayout = () => {
       tip: "Manage Bookings",
     },
     {
-      to: "/dashboard/my-inventory",
-      label: "My Inventory",
+      to: "/dashboard/my-added-tickets",
+      label: "My Added Tickets",
       icon: <SiGoogletasks />,
-      tip: "My Inventory",
+      tip: "My Added Tickets",
+    },
+    {
+      to: "/dashboard/revenue",
+      label: "Revenue Overview",
+      icon: <SiGoogletasks />,
+      tip: "Revenue Overview",
     },
   ];
 

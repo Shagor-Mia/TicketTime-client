@@ -14,7 +14,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import AddTickets from "../pages/Dashboard/Vendors/AddTickets";
-import MyInventory from "../pages/Dashboard/Vendors/MyInventory";
+
 import MyOrders from "../pages/Dashboard/Users/MyOrders";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Profile from "../pages/Dashboard/Common/Profile";
@@ -22,12 +22,13 @@ import ManageOrders from "../pages/Dashboard/Vendors/ManageOrders";
 import DashboardLayout from "../layouts/DashboardLayout";
 import About from "../pages/About/About";
 import AllTicket from "../pages/AllTicket/AllTicket";
-import Statistics from "../pages/Dashboard/Common/Statistics";
 import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import ApproveVendors from "../pages/Dashboard/Admin/ApproveVendors";
 import Branch from "../pages/Branch/Branch";
 import ApprovedTicket from "../pages/Dashboard/Admin/ApprovedTicket";
+import MyAddedTickets from "../pages/Dashboard/Vendors/MyAddedTickets";
+import RevenueOverview from "../pages/Dashboard/Vendors/RevenueOverview";
 
 export const router = createBrowserRouter([
   {
@@ -106,11 +107,11 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-inventory",
+        path: "my-added-tickets",
         element: (
           <PrivateRouter>
             <VendorRouter>
-              <MyInventory />
+              <MyAddedTickets />
             </VendorRouter>
           </PrivateRouter>
         ),
@@ -124,6 +125,10 @@ export const router = createBrowserRouter([
             </VendorRouter>
           </PrivateRouter>
         ),
+      },
+      {
+        path: "revenue",
+        element: <RevenueOverview />,
       },
       // admin
       {

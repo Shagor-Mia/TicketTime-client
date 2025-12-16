@@ -1,10 +1,7 @@
 import React from "react";
-import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
 
-const VendorDashboard = () => {
-  const axiosSecure = useSecureAxios();
-
+const VendorDashboard = ({ axiosSecure }) => {
   const {
     data: vendor,
     isLoading,

@@ -48,8 +48,10 @@ const AddTicketForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const imageFile = data.image[0];
-      const imageUrl = await handleImageUpload(imageFile);
+      let imageUrl = "";
+      if (data.image && data.image[0]) {
+        imageUrl = await handleImageUpload(data.image[0]);
+      }
 
       const ticketData = {
         title: data.title,
@@ -60,7 +62,7 @@ const AddTicketForm = () => {
         quantity: Number(data.quantity),
         departure: data.departure,
         perks: data.perks || [],
-        image: imageUrl,
+        image: imageUrl, // <-- make sure this is a string
         vendor: {
           name: user.displayName,
           email: user.email,
@@ -193,8 +195,11 @@ const AddTicketForm = () => {
 
         {/* Image upload */}
         <div className="flex flex-col">
-          <label className="text-gray-700">Ticket Image</label>
-          <input type="file" accept="image/*" {...register("image")} />
+          <label className="text-gray-700 ">Ticket Image</label>
+          <input type="file" className="border px-2" {...register("image")} />
+          {errors.image?.type === "required" && (
+            <span className="text-red-500">Photo is required!</span>
+          )}
         </div>
 
         {/* Vendor Info */}
