@@ -30,6 +30,7 @@ import ApprovedTicket from "../pages/Dashboard/Admin/ApprovedTicket";
 import MyAddedTickets from "../pages/Dashboard/Vendors/MyAddedTickets";
 import RevenueOverview from "../pages/Dashboard/Vendors/RevenueOverview";
 import Advertise from "../pages/Dashboard/Admin/Advertise";
+import AdvertiseDetails from "../pages/Ticket/AdvertiseDetails";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "/ticket/:id",
         element: <TicketDetails />,
+      },
+      {
+        path: "/advertise/:id",
+        element: <AdvertiseDetails />,
       },
       {
         path: "/payment-success",

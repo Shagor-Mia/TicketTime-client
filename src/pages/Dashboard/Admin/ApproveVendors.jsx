@@ -74,22 +74,22 @@ const ApproveVendors = () => {
   };
 
   return (
-    <div className="my-10 mx-auto max-w-6xl">
-      <h1 className="text-5xl font-bold">
-        Vendors Approval pending : {vendors.length}
+    <div className="my-10 mx-auto max-w-6xl px-2">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">
+        Vendors Approval Pending: {vendors.length}
       </h1>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
+      <div className="overflow-x-auto w-full">
+        <table className="table table-zebra w-full min-w-[600px]">
           <thead>
             <tr>
-              <th></th>
+              <th>#</th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th className="hidden sm:table-cell">Email</th>
+              <th className="hidden md:table-cell">Phone</th>
               <th>Application Status</th>
-              <th>Work Status</th>
-              <th>Location</th>
+              <th className="hidden lg:table-cell">Work Status</th>
+              <th className="hidden lg:table-cell">Location</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -98,38 +98,41 @@ const ApproveVendors = () => {
               <tr key={vendor._id}>
                 <th>{index + 1}</th>
                 <td>{vendor.name}</td>
-                <td>{vendor.email}</td>
-                <td>{vendor.phone}</td>
+                <td className="hidden sm:table-cell">{vendor.email}</td>
+                <td className="hidden md:table-cell">{vendor.phone}</td>
                 <td
-                  className={
+                  className={`font-semibold px-2 py-1 rounded ${
                     vendor.status === "approved"
-                      ? "text-green-500 bg-green-200"
-                      : "text-red-400"
-                  }
+                      ? "text-green-700 "
+                      : "text-red-600 "
+                  }`}
                 >
                   {vendor.status}
                 </td>
-                <td>{vendor.workStatus}</td>
-                <td>{vendor.location}</td>
-                <td>
-                  <button onClick={() => viewVendor(vendor)} className="btn">
+                <td className="hidden lg:table-cell">{vendor.workStatus}</td>
+                <td className="hidden lg:table-cell">{vendor.location}</td>
+                <td className="flex gap-1 flex-wrap justify-center">
+                  <button
+                    onClick={() => viewVendor(vendor)}
+                    className="btn btn-sm"
+                  >
                     <FaEye />
                   </button>
                   <button
                     onClick={() => handleApproval(vendor)}
-                    className="btn"
+                    className="btn btn-sm"
                   >
                     <FaUserCheck />
                   </button>
                   <button
                     onClick={() => handleRejection(vendor)}
-                    className="btn mx-2"
+                    className="btn btn-sm"
                   >
                     <IoPersonRemoveSharp />
                   </button>
                   <button
                     onClick={() => deleteVendor(vendor._id)}
-                    className="btn"
+                    className="btn btn-sm"
                   >
                     <FaRegTrashCan />
                   </button>

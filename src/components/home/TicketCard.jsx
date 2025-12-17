@@ -5,7 +5,7 @@ const TicketCard = ({ ticket }) => {
   const navigate = useNavigate();
 
   const handleSeeDetails = () => {
-    navigate(`/tickets/${ticket.id}`);
+    navigate(`/advertise/${ticket._id}`);
   };
 
   return (
@@ -17,21 +17,16 @@ const TicketCard = ({ ticket }) => {
       />
       <div className="p-4">
         <h3 className="text-xl font-semibold mb-2">{ticket.title}</h3>
+
         <p className="text-gray-600 mb-1">
-          <strong>Price:</strong> ${ticket.price} / unit
-        </p>
-        <p className="text-gray-600 mb-1">
-          <strong>Quantity:</strong> {ticket.quantity}
-        </p>
-        <p className="text-gray-600 mb-1">
-          <strong>Transport:</strong> {ticket.transport}
+          <strong>Transport:</strong> {ticket.transportType}
         </p>
         <p className="text-gray-600 mb-4">
           <strong>Perks:</strong> {ticket.perks}
         </p>
         <button
           onClick={handleSeeDetails}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
+          className="bg-blue-600 text-white w-full px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
         >
           See Details
         </button>

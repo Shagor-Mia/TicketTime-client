@@ -10,14 +10,14 @@ const ApproveTickets = () => {
   const { data: tickets = [], refetch } = useQuery({
     queryKey: ["tickets"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/tickets"); // ✅ fetch ALL
+      const res = await axiosSecure.get("/tickets");
       return res.data;
     },
   });
 
   const updateStatus = (ticket, status) => {
     axiosSecure.patch(`/tickets/${ticket._id}/approve`, { status }).then(() => {
-      refetch(); // ✅ status updates but row stays
+      refetch(); // status updates but row stays
       Swal.fire({
         icon: "success",
         title: `Ticket ${status}`,

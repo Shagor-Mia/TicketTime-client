@@ -8,7 +8,7 @@ import { SiGoogletasks } from "react-icons/si";
 import { FaTasks, FaUser, FaUserCheck } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-
+import { FcApprove } from "react-icons/fc";
 import useRole from "../hooks/useRole";
 import Navbar from "../components/shared/Navbar";
 import logoImg from "../assets/bus1.png";
@@ -56,7 +56,7 @@ const DashboardLayout = () => {
     {
       to: "/dashboard/approve-ticket",
       label: "Approve Tickets",
-      icon: <FaUserCheck />,
+      icon: <FcApprove />,
     },
     { to: "/dashboard/manage-users", label: "Users", icon: <FaUser /> },
     {
