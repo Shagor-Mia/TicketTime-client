@@ -1,23 +1,30 @@
 import React from "react";
-
 import { Outlet } from "react-router";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
+import authBg from "../assets/authbg.jpg";
 
 const AuthLayout = () => {
   return (
-    <div className="max-w-7xl mx-auto bg-white ">
+    <>
       <Navbar />
-      <div className="items-center py-20">
-        <div className="">
+
+      <div
+        className="max-w-7xl mx-auto bg-white flex items-center justify-center px-4"
+        style={{
+          backgroundImage: `url(${authBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="w-full">
           <Outlet />
         </div>
-        {/* <div className="flex-1">
-          <img src={authImg} className="" alt="" />
-        </div> */}
       </div>
+
       <Footer />
-    </div>
+    </>
   );
 };
 

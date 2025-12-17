@@ -5,6 +5,7 @@ import useSecureAxios from "../../hooks/useSecureAxios";
 import { Link, useLocation, useNavigate } from "react-router";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const {
@@ -18,17 +19,10 @@ const Register = () => {
   const navigate = useNavigate();
   const axiosSecure = useSecureAxios();
 
-  // console.log("register location", location);
-
   const handleRegister = (data) => {
-    // console.log(data.photo[0]);
-
     const profileImage = data.photo[0];
     userRegister(data.email, data.password)
       .then((result) => {
-        // console.log(result.user);
-
-        // store data image url
         const formData = new FormData();
         formData.append("image", profileImage);
         const img_URL = `https://api.imgbb.com/1/upload?key=${
@@ -36,32 +30,23 @@ const Register = () => {
         }`;
 
         axios.post(img_URL, formData).then((res) => {
-          // console.log("after response", res.data);
-
           const photoURL = res.data.data.url;
 
-          // create user in the database
           const userInfo = {
             email: data.email,
             displayName: data.name,
             photoURL: photoURL,
           };
           axiosSecure.post("/users", userInfo).then((res) => {
-            if (res.data.insertedId) {
-              console.log("user created in the database");
-            }
+            if (res.data.insertedId) console.log("user created in DB");
           });
 
-          //update user profile
           const userProfile = {
             displayName: data.name,
             photoURL: photoURL,
           };
           updateRegisterUserProfile(userProfile)
-            .then(() => {
-              console.log("user profile updated done.");
-              navigate(location?.state || "/");
-            })
+            .then(() => navigate(location?.state || "/"))
             .catch((err) => console.log(err));
         });
       })
@@ -69,91 +54,111 @@ const Register = () => {
   };
 
   return (
-    <div className="card bg-base-100 mx-auto w-full max-w-sm shrink-0 shadow-2xl">
-      <h1 className="text-5xl font-bold text-center mt-5">Create Account</h1>
-      <p className="text-center text-xl font-semibold">With ZapShift</p>
-      <form onSubmit={handleSubmit(handleRegister)} className="card-body">
-        <fieldset className="fieldset">
-          {/*name  */}
-          <label className="label">Name</label>
-          <input
-            type="text"
-            {...register("name", { required: true })}
-            className="input"
-            placeholder="Your Name"
-          />
-          {errors.name?.type === "required" && (
-            <span className="text-red-500">Name is required!</span>
-          )}
-          {/* image upload */}
+    <div className="min-h-screen flex items-center justify-center  px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className=" shadow-2xl rounded-2xl w-full max-w-md p-8 md:p-10"
+      >
+        <div className="text-center mb-6">
+          <h1 className="text-4xl text-black font-bold">Create Account</h1>
+          <p className="text-gray-700 mt-2">Sign up to get started</p>
+        </div>
 
-          <label className="label">Photo</label>
-          <input
-            type="file"
-            {...register("photo", { required: true })}
-            className="file-input"
-            placeholder="Your photo"
-          />
-          {errors.photo?.type === "required" && (
-            <span className="text-red-500">Photo is required!</span>
-          )}
-          {/* email */}
-          <label className="label">Email</label>
-          <input
-            type="email"
-            {...register("email", { required: true })}
-            className="input"
-            placeholder="Email"
-          />
-          {errors.email?.type === "required" && (
-            <span className="text-red-500">Email is required!</span>
-          )}
-          {/*  */}
-          <label className="label">Password</label>
-          <input
-            type="password"
-            {...register("password", {
-              required: true,
-              minLength: 6,
-              pattern:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-            })}
-            className="input"
-            placeholder="Password"
-          />
-          {errors.password?.type === "required" && (
-            <span className="text-red-500">Password required</span>
-          )}
-          {errors.password?.type === "minLength" && (
-            <span className="text-red-500">
-              Password at least 6 character length!
-            </span>
-          )}
-          {errors.password?.type === "pattern" && (
-            <span className="text-red-500">
-              password At least one uppercase letter,At least one lowercase
-              letter,At least one number,At least one special character.
-            </span>
-          )}
-          <div>
-            <a className="link link-hover">Forgot password?</a>
+        <form onSubmit={handleSubmit(handleRegister)} className="space-y-5">
+          {/* Name */}
+          <div className="flex flex-col space-y-2">
+            <label className="text-sm font-medium">Name</label>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              {...register("name", { required: true })}
+              className="input input-bordered w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#632ee3]"
+            />
+            {errors.name && (
+              <span className="text-red-500 text-sm">Name is required!</span>
+            )}
           </div>
-          <button className="btn btn-neutral mt-4">Register</button>
-        </fieldset>
-        <p>
-          Already have an Account?{" "}
-          <span>
-            <Link
-              state={location.state}
-              to={"/login"}
-              className="text-blue-600 underline"
-            >
-              Login
-            </Link>
-          </span>
+
+          {/* Photo Upload */}
+          <div className="flex flex-col space-y-2">
+            <label className="text-sm font-medium">Photo</label>
+            <input
+              type="file"
+              {...register("photo", { required: true })}
+              className="file-input file-input-bordered w-full"
+            />
+            {errors.photo && (
+              <span className="text-red-500 text-sm">Photo is required!</span>
+            )}
+          </div>
+
+          {/* Email */}
+          <div className="flex flex-col space-y-2">
+            <label className="text-sm font-medium">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              {...register("email", { required: true })}
+              className="input input-bordered w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#632ee3]"
+            />
+            {errors.email && (
+              <span className="text-red-500 text-sm">Email is required!</span>
+            )}
+          </div>
+
+          {/* Password */}
+          <div className="flex flex-col space-y-2">
+            <label className="text-sm font-medium">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                pattern:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+              })}
+              className="input input-bordered w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#632ee3]"
+            />
+            {errors.password?.type === "required" && (
+              <span className="text-red-500 text-sm">Password is required</span>
+            )}
+            {errors.password?.type === "minLength" && (
+              <span className="text-red-500 text-sm">
+                Password must be at least 6 characters
+              </span>
+            )}
+            {errors.password?.type === "pattern" && (
+              <span className="text-red-500 text-sm">
+                Password must contain uppercase, lowercase, number, and special
+                character
+              </span>
+            )}
+          </div>
+
+          <button className="w-full py-3 mt-3 bg-gradient-to-br from-[#632ee3] to-[#9f62f2] text-white font-semibold rounded-lg hover:opacity-90 transition duration-200">
+            Register
+          </button>
+        </form>
+
+        <p className="text-center text-gray-700 mt-4">
+          Already have an account?{" "}
+          <Link
+            state={location.state}
+            to="/login"
+            className="text-blue-600 underline hover:text-blue-700"
+          >
+            Login
+          </Link>
         </p>
-      </form>
-      <GoogleLogin />
+
+        {/* Google Login */}
+        <div className="mt-6">
+          <GoogleLogin />
+        </div>
+      </motion.div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const {
@@ -14,7 +15,6 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log("after login", location);
 
   const handleLogin = (data) => {
     userLogin(data.email, data.password)
@@ -26,57 +26,81 @@ const Login = () => {
         console.log(err);
       });
   };
+
   return (
-    <div className="card bg-base-100 mx-auto w-full max-w-sm shrink-0 shadow-2xl">
-      <h1 className="text-5xl font-bold text-center mt-5">Welcome Back</h1>
-      <p className="text-center text-xl font-semibold">Please Login</p>
-      <form onSubmit={handleSubmit(handleLogin)} className="card-body">
-        <fieldset className="fieldset">
-          <label className="label">Email</label>
-          <input
-            type="email"
-            {...register("email", { required: true })}
-            className="input"
-            placeholder="Email"
-          />
-          {errors.email?.type === "required" && (
-            <span className="text-red-500">Email is required!</span>
-          )}
-          {/*  */}
-          <label className="label">Password</label>
-          <input
-            type="password"
-            {...register("password", { required: true, minLength: 6 })}
-            className="input"
-            placeholder="Password"
-          />
-          {errors.password?.type === "required" && (
-            <span className="text-red-500">password is required!</span>
-          )}
-          {errors.password?.type === "minlength" && (
-            <span className="text-red-500">password must be 6 character!</span>
-          )}
-          <div>
-            <Link to={"/forget-password"} className="link link-hover">
+    <div className="min-h-screen flex items-center justify-center  px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className=" shadow-2xl rounded-2xl w-full max-w-md p-8 md:p-10"
+      >
+        <div className="text-center mb-6">
+          <h1 className="text-4xl text-black font-bold">Welcome Back</h1>
+          <p className="text-gray-500 mt-2">Please login to continue</p>
+        </div>
+
+        <form onSubmit={handleSubmit(handleLogin)} className="space-y-5">
+          <div className="flex flex-col space-y-2">
+            <label className="text-sm font-medium">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              {...register("email", { required: true })}
+              className="input input-bordered w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#632ee3]"
+            />
+            {errors.email && (
+              <span className="text-red-500 text-sm">Email is required!</span>
+            )}
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="text-sm font-medium">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", { required: true, minLength: 6 })}
+              className="input input-bordered w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#632ee3]"
+            />
+            {errors.password?.type === "required" && (
+              <span className="text-red-500 text-sm">
+                Password is required!
+              </span>
+            )}
+            {errors.password?.type === "minLength" && (
+              <span className="text-red-500 text-sm">
+                Password must be at least 6 characters!
+              </span>
+            )}
+          </div>
+
+          <div className="flex justify-between text-sm text-blue-600">
+            <Link to="/forget-password" className="hover:underline">
               Forgot password?
             </Link>
           </div>
-          <button className="btn btn-neutral mt-4">Login</button>
-        </fieldset>
-        <p>
-          New To Zap Shift?{" "}
-          <span>
-            <Link
-              state={location.state}
-              to={"/signup"}
-              className="text-blue-600 underline"
-            >
-              Register
-            </Link>
-          </span>
+
+          <button className="w-full py-3 mt-3 bg-gradient-to-br from-[#632ee3] to-[#9f62f2] text-white font-semibold rounded-lg hover:opacity-90 transition duration-200">
+            Login
+          </button>
+        </form>
+
+        <p className="text-center text-gray-500 mt-4">
+          New to TicketTime?{" "}
+          <Link
+            state={location.state}
+            to="/signup"
+            className="text-blue-600 underline hover:text-blue-700"
+          >
+            Register
+          </Link>
         </p>
-      </form>
-      <GoogleLogin />
+
+        {/* Google Login */}
+        <div className="mt-6">
+          <GoogleLogin />
+        </div>
+      </motion.div>
     </div>
   );
 };
