@@ -31,6 +31,7 @@ import MyAddedTickets from "../pages/Dashboard/Vendors/MyAddedTickets";
 import RevenueOverview from "../pages/Dashboard/Vendors/RevenueOverview";
 import Advertise from "../pages/Dashboard/Admin/Advertise";
 import AdvertiseDetails from "../pages/Ticket/AdvertiseDetails";
+import Contact from "../pages/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/ticket",

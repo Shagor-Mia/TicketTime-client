@@ -5,6 +5,7 @@ import { ClockLoader } from "react-spinners";
 import Theme from "./Theme";
 import useAuth from "../../hooks/useAuth";
 import plan from "../../assets/plane-removebg-preview.png";
+import AvatarDropdown from "./RghtSectionNav";
 
 const Navbar = () => {
   const { user, logOut, loading } = useAuth();
@@ -42,6 +43,7 @@ const Navbar = () => {
           About Us
         </NavLink>
       </li>
+
       <li className=" mx-2">
         <NavLink className={linkActive} to={"/branch"}>
           Branch
@@ -50,6 +52,11 @@ const Navbar = () => {
 
       {user && (
         <>
+          <li className=" mx-2">
+            <NavLink className={linkActive} to={"/contact"}>
+              Contact Us
+            </NavLink>
+          </li>
           <li className=" mx-2">
             <NavLink className={linkActive} to={"/dashboard"}>
               dashboard
@@ -66,7 +73,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="max-w-7xl w-full mx-auto flex justify-between items-center py-3 px-4 md:px-8 lg:px-10">
+      <div className="max-w-7xl w-full mx-auto flex justify-between items-center px-4 md:px-8 lg:px-10">
         {/* Left Section */}
         <motion.div
           className="flex justify-center items-center"
@@ -139,40 +146,11 @@ const Navbar = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           <Theme />
-          <motion.img
-            className="md:w-12 md:h-12 h-10 w-10 object-cover rounded-full"
-            src={
-              user
-                ? user.photoURL
-                : "https://img.icons8.com/?size=40&id=23493&format=png"
-            }
-            alt="User Avatar"
-            title={user ? user.displayName || "User" : "Guest"}
-            whileHover={{ scale: 1.1, rotate: 2 }}
-            transition={{ type: "spring", stiffness: 250 }}
+          <AvatarDropdown
+            user={user}
+            loading={loading}
+            handleLogout={handleLogout}
           />
-
-          {loading ? (
-            <ClockLoader height={5} color="#9f62f2" />
-          ) : user ? (
-            <motion.button
-              onClick={handleLogout}
-              className="btn md:text-[16px] text-xs bg-linear-to-br from-[#632ee3] to-[#9f62f2] text-white hover:opacity-90 md:mr-0 mr-4"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Logout
-            </motion.button>
-          ) : (
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                to={"/login"}
-                className="btn md:text-[16px] text-xs bg-linear-to-br from-[#632ee3] to-[#9f62f2] text-white hover:opacity-90 "
-              >
-                Login
-              </Link>
-            </motion.div>
-          )}
         </motion.div>
       </div>
     </motion.div>
