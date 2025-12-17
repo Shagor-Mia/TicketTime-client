@@ -1,4 +1,4 @@
-import { ScaleLoader } from "react-spinners";
+import { RingLoader, ScaleLoader } from "react-spinners";
 
 const LoadingSpinner = ({ smallHeight }) => {
   return (

@@ -1,7 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import MyBookedTicketCard from "../../../components/Bookings/MyBookedTicketCard";
 import LoadingSpinner from "../../../components/shared/Spinner";
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15, // stagger each card
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const MyOrders = () => {
   const axiosSecure = useSecureAxios();
@@ -25,11 +40,18 @@ const MyOrders = () => {
           You have not booked any tickets yet.
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
           {bookings.map((booking) => (
-            <MyBookedTicketCard key={booking._id} booking={booking} />
+            <motion.div key={booking._id} variants={itemVariants}>
+              <MyBookedTicketCard booking={booking} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );

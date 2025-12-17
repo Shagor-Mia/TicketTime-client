@@ -29,6 +29,7 @@ import Branch from "../pages/Branch/Branch";
 import ApprovedTicket from "../pages/Dashboard/Admin/ApprovedTicket";
 import MyAddedTickets from "../pages/Dashboard/Vendors/MyAddedTickets";
 import RevenueOverview from "../pages/Dashboard/Vendors/RevenueOverview";
+import Advertise from "../pages/Dashboard/Admin/Advertise";
 
 export const router = createBrowserRouter([
   {
@@ -151,6 +152,16 @@ export const router = createBrowserRouter([
           <PrivateRouter>
             <AdminRouter>
               <ApprovedTicket />
+            </AdminRouter>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "advertise",
+        element: (
+          <PrivateRouter>
+            <AdminRouter>
+              <Advertise />
             </AdminRouter>
           </PrivateRouter>
         ),

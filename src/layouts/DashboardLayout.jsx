@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import { LuTicketsPlane } from "react-icons/lu";
 import { AiOutlineHome } from "react-icons/ai";
-
+import { RiAdvertisementLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { SiGoogletasks } from "react-icons/si";
 import { FaTasks, FaUser, FaUserCheck } from "react-icons/fa";
@@ -59,6 +59,11 @@ const DashboardLayout = () => {
       icon: <FaUserCheck />,
     },
     { to: "/dashboard/manage-users", label: "Users", icon: <FaUser /> },
+    {
+      to: "/dashboard/advertise",
+      label: "Advertise",
+      icon: <RiAdvertisementLine />,
+    },
   ];
 
   const menuItems = [
@@ -132,7 +137,7 @@ const DashboardLayout = () => {
             </div>
 
             {/* Menu */}
-            <ul className="menu px-2 gap-1">
+            <ul className="menu px-2 gap-1 max-h-[500px] overflow-y-auto">
               {menuItems.map((item, i) => (
                 <li key={i}>
                   <NavLink

@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import UpdateProfileModal from "../../../components/Modals/UpdateProfileModal";
+import useRole from "../../../hooks/useRole";
 
 const ProfilePage = () => {
   const { user, logOut } = useAuth();
+  const { role } = useRole();
 
   if (!user) {
     toast.error("user not found");
@@ -63,6 +65,9 @@ const ProfilePage = () => {
               {user?.displayName}
             </h1>
             <p className="md:text-xl text-base-content py-3">{user?.email}</p>
+            <p className="md:text-xl text-base-content py-3">
+              Role: <span className="text-red-500 text-2xl">{role}</span>
+            </p>
             <div className="mt-5">
               <UpdateProfileModal />
 
