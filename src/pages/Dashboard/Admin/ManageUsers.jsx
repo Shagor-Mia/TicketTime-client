@@ -19,10 +19,7 @@ const ManageUsers = () => {
     },
   });
 
-  // Role Handler
   const handleMakeUser = (user, role) => {
-    const roleInfo = { role };
-
     Swal.fire({
       title: "Are you sure?",
       text: `Make this user an ${role}?`,
@@ -33,7 +30,7 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, I Agree!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
+        axiosSecure.patch(`/users/${user._id}/role`, { role }).then((res) => {
           if (res.data.modifiedCount) {
             refetch();
             Swal.fire({
@@ -48,34 +45,32 @@ const ManageUsers = () => {
     });
   };
 
-  // Open Modal Handler
   const openDetailsModal = (user) => {
     setSelectedUser(user);
-    document.getElementById("user_details_modal").showModal();
+    document.getElementById("user_details_modal")?.showModal();
   };
 
   return (
-    <div className="my-10 mx-auto max-w-6xl">
-      <h1 className="text-3xl font-bold my-3">Manage Users {users.length}</h1>
+    <div className="my-10 mx-auto max-w-6xl px-2">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold my-3 text-center">
+        Manage Users ({users.length})
+      </h1>
 
       {/* Search */}
-      <label className="input my-3 flex items-center gap-2">
-        <svg className="h-[1em] opacity-50" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
+      <div className="my-3 flex items-center gap-2 max-w-sm mx-auto">
         <input
-          onChange={(e) => setSearchText(e.target.value)}
           type="search"
-          placeholder="Search"
+          placeholder="Search users..."
+          className="input w-full"
+          onChange={(e) => setSearchText(e.target.value)}
         />
-      </label>
+      </div>
 
-      <div className="overflow-x-auto">
-        <table className="table">
+      <div className="overflow-x-auto w-full">
+        <table className="table table-zebra w-full min-w-[700px]">
           <thead>
             <tr>
-              <th>Total:{users.length}</th>
+              <th>#</th>
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
@@ -95,9 +90,7 @@ const ManageUsers = () => {
                         <img src={user.photoURL} alt="avatar" />
                       </div>
                     </div>
-                    <div>
-                      <p className="font-bold">{user.displayName}</p>
-                    </div>
+                    <p className="font-bold">{user.displayName}</p>
                   </div>
                 </td>
 
@@ -109,18 +102,18 @@ const ManageUsers = () => {
 
                 <td>{user.role}</td>
 
-                <td>
+                <td className="flex gap-1 flex-wrap justify-center">
                   {user.role === "admin" ? (
                     <button
                       onClick={() => handleMakeUser(user, "user")}
-                      className="btn"
+                      className="btn btn-sm"
                     >
                       <FiShieldOff />
                     </button>
                   ) : (
                     <button
                       onClick={() => handleMakeUser(user, "admin")}
-                      className="btn"
+                      className="btn btn-sm"
                     >
                       <FaUserShield />
                     </button>

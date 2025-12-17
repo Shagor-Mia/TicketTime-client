@@ -62,7 +62,7 @@ const AddTicketForm = () => {
         quantity: Number(data.quantity),
         departure: data.departure,
         perks: data.perks || [],
-        image: imageUrl, // <-- make sure this is a string
+        image: imageUrl,
         vendor: {
           name: user.displayName,
           email: user.email,
@@ -80,14 +80,14 @@ const AddTicketForm = () => {
   if (isError) return <div>Error occurred</div>;
 
   return (
-    <div className="w-full min-h-[calc(100vh-40px)] flex justify-center items-center bg-gray-50 p-6">
+    <div className="w-full min-h-[calc(100vh-40px)] flex justify-center items-center  p-4 sm:p-6">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md space-y-6"
+        className="w-full max-w-3xl bg-white p-6 sm:p-8 rounded-lg shadow-md space-y-6"
       >
         {/* Ticket Title */}
         <div className="flex flex-col">
-          <label className="text-gray-700">Ticket Title</label>
+          <label className="text-gray-700 font-medium">Ticket Title</label>
           <input
             type="text"
             placeholder="Enter ticket title"
@@ -95,14 +95,14 @@ const AddTicketForm = () => {
             {...register("title", { required: "Title is required" })}
           />
           {errors.title && (
-            <p className="text-xs text-red-500">{errors.title.message}</p>
+            <p className="text-xs text-red-500 mt-1">{errors.title.message}</p>
           )}
         </div>
 
         {/* From & To */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className="text-gray-700">From</label>
+            <label className="text-gray-700 font-medium">From</label>
             <input
               type="text"
               placeholder="Departure location"
@@ -110,11 +110,11 @@ const AddTicketForm = () => {
               {...register("from", { required: "Departure location required" })}
             />
             {errors.from && (
-              <p className="text-xs text-red-500">{errors.from.message}</p>
+              <p className="text-xs text-red-500 mt-1">{errors.from.message}</p>
             )}
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700">To</label>
+            <label className="text-gray-700 font-medium">To</label>
             <input
               type="text"
               placeholder="Arrival location"
@@ -122,14 +122,14 @@ const AddTicketForm = () => {
               {...register("to", { required: "Arrival location required" })}
             />
             {errors.to && (
-              <p className="text-xs text-red-500">{errors.to.message}</p>
+              <p className="text-xs text-red-500 mt-1">{errors.to.message}</p>
             )}
           </div>
         </div>
 
         {/* Transport Type */}
         <div className="flex flex-col">
-          <label className="text-gray-700">Transport Type</label>
+          <label className="text-gray-700 font-medium">Transport Type</label>
           <select
             className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
             {...register("transportType", {
@@ -142,16 +142,18 @@ const AddTicketForm = () => {
             <option value="Flight">Flight</option>
           </select>
           {errors.transportType && (
-            <p className="text-xs text-red-500">
+            <p className="text-xs text-red-500 mt-1">
               {errors.transportType.message}
             </p>
           )}
         </div>
 
         {/* Price & Quantity */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className="text-gray-700">Price (per unit)</label>
+            <label className="text-gray-700 font-medium">
+              Price (per unit)
+            </label>
             <input
               type="number"
               placeholder="Price"
@@ -160,7 +162,7 @@ const AddTicketForm = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700">Ticket Quantity</label>
+            <label className="text-gray-700 font-medium">Ticket Quantity</label>
             <input
               type="number"
               placeholder="Quantity"
@@ -172,7 +174,9 @@ const AddTicketForm = () => {
 
         {/* Departure */}
         <div className="flex flex-col">
-          <label className="text-gray-700">Departure Date & Time</label>
+          <label className="text-gray-700 font-medium">
+            Departure Date & Time
+          </label>
           <input
             type="datetime-local"
             className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
@@ -182,8 +186,8 @@ const AddTicketForm = () => {
 
         {/* Perks */}
         <div className="flex flex-col">
-          <label className="text-gray-700">Perks</label>
-          <div className="flex gap-4 mt-2">
+          <label className="text-gray-700 font-medium">Perks</label>
+          <div className="flex flex-wrap gap-4 mt-2">
             {["AC", "Breakfast", "WiFi", "Snacks"].map((perk) => (
               <label key={perk} className="flex items-center gap-2">
                 <input type="checkbox" value={perk} {...register("perks")} />
@@ -195,17 +199,18 @@ const AddTicketForm = () => {
 
         {/* Image upload */}
         <div className="flex flex-col">
-          <label className="text-gray-700 ">Ticket Image</label>
-          <input type="file" className="border px-2" {...register("image")} />
-          {errors.image?.type === "required" && (
-            <span className="text-red-500">Photo is required!</span>
-          )}
+          <label className="text-gray-700 font-medium">Ticket Image</label>
+          <input
+            type="file"
+            className="border px-2 py-1 rounded-md"
+            {...register("image")}
+          />
         </div>
 
         {/* Vendor Info */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className="text-gray-700">Vendor Name</label>
+            <label className="text-gray-700 font-medium">Vendor Name</label>
             <input
               type="text"
               value={user?.displayName || ""}
@@ -214,7 +219,7 @@ const AddTicketForm = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700">Vendor Email</label>
+            <label className="text-gray-700 font-medium">Vendor Email</label>
             <input
               type="text"
               value={user?.email || ""}
@@ -226,7 +231,7 @@ const AddTicketForm = () => {
 
         <button
           type="submit"
-          className="w-full py-3 mt-4 bg-lime-500 text-white font-semibold rounded-md flex justify-center items-center"
+          className="w-full py-3 mt-4 bg-lime-500 text-white font-semibold rounded-md flex justify-center items-center gap-2"
         >
           {isPending ? (
             <TbFidgetSpinner className="animate-spin" />

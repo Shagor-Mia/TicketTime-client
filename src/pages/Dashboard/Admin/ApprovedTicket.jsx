@@ -17,7 +17,7 @@ const ApproveTickets = () => {
 
   const updateStatus = (ticket, status) => {
     axiosSecure.patch(`/tickets/${ticket._id}/approve`, { status }).then(() => {
-      refetch(); // status updates but row stays
+      refetch();
       Swal.fire({
         icon: "success",
         title: `Ticket ${status}`,
@@ -27,45 +27,49 @@ const ApproveTickets = () => {
     });
   };
 
+  if (!tickets.length) {
+    return <p className="text-center py-10 text-gray-500">No tickets found.</p>;
+  }
+
   return (
-    <div className="max-w-7xl mx-auto my-10">
-      <h2 className="text-4xl font-bold mb-6">
+    <div className="max-w-7xl mx-auto my-10 px-2">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">
         Ticket Approval Panel ({tickets.length})
       </h2>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
+      <div className="overflow-x-auto w-full">
+        <table className="table table-zebra w-full min-w-[700px]">
           <thead>
             <tr>
               <th>#</th>
               <th>Title</th>
-              <th>Route</th>
-              <th>Transport</th>
-              <th>Vendor</th>
+              <th className="hidden sm:table-cell">Route</th>
+              <th className="hidden md:table-cell">Transport</th>
+              <th className="hidden lg:table-cell">Vendor</th>
               <th>Price</th>
-              <th>Qty</th>
-              <th>Departure</th>
+              <th className="hidden lg:table-cell">Qty</th>
+              <th className="hidden xl:table-cell">Departure</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {tickets.map((ticket, index) => (
               <tr key={ticket._id}>
                 <th>{index + 1}</th>
                 <td>{ticket.title}</td>
-                <td>
+                <td className="hidden sm:table-cell">
                   {ticket.from} → {ticket.to}
                 </td>
-                <td>{ticket.transportType}</td>
-                <td>{ticket.vendor?.email}</td>
+                <td className="hidden md:table-cell">{ticket.transportType}</td>
+                <td className="hidden lg:table-cell">{ticket.vendor?.email}</td>
                 <td>৳{ticket.price}</td>
-                <td>{ticket.quantity}</td>
-                <td>{new Date(ticket.departure).toLocaleString()}</td>
-
+                <td className="hidden lg:table-cell">{ticket.quantity}</td>
+                <td className="hidden xl:table-cell">
+                  {new Date(ticket.departure).toLocaleString()}
+                </td>
                 <td
-                  className={`font-semibold ${
+                  className={`font-semibold px-2 py-1 rounded ${
                     ticket.verificationStatus === "approved"
                       ? "text-green-600"
                       : ticket.verificationStatus === "rejected"
@@ -75,8 +79,7 @@ const ApproveTickets = () => {
                 >
                   {ticket.verificationStatus}
                 </td>
-
-                <td className="flex gap-2">
+                <td className="flex gap-1 flex-wrap justify-center">
                   <button
                     onClick={() => updateStatus(ticket, "approved")}
                     className="btn btn-sm"
@@ -84,7 +87,6 @@ const ApproveTickets = () => {
                   >
                     <FaUserCheck />
                   </button>
-
                   <button
                     onClick={() => updateStatus(ticket, "rejected")}
                     className="btn btn-sm"

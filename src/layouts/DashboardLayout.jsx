@@ -76,7 +76,7 @@ const DashboardLayout = () => {
     <>
       {/* <Navbar /> */}
 
-      <div className="drawer lg:drawer-open max-w-7xl mx-auto">
+      <div className="drawer lg:drawer-open max-w-7xl bg-amber-100 mx-auto">
         <input
           id="dashboard-drawer"
           type="checkbox"

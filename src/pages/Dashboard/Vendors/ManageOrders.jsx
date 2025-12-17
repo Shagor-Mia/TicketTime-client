@@ -4,7 +4,6 @@ import { IoPersonRemoveSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import useSecureAxios from "../../../hooks/useSecureAxios";
-import VendorDashboard from "./VendorDashboard";
 
 const ManageOrders = () => {
   const axiosSecure = useSecureAxios();
@@ -42,7 +41,6 @@ const ManageOrders = () => {
 
   return (
     <div className="my-10 mx-auto max-w-6xl">
-      {/* <VendorDashboard axiosSecure={axiosSecure} /> */}
       <h1 className="text-4xl font-bold mb-6">
         Bookings Pending Approval: {data.length}
       </h1>
