@@ -71,14 +71,20 @@ const routes = [
 
 const PopularRoutesSwiper = () => {
   return (
-    <section className="container mx-auto py-12">
-      <h2 className="text-3xl font-bold mb-6 text-center">Popular Routes</h2>
-      <p className="text-center text-gray-700 mb-8">
-        Discover our most booked routes and travel comfortably to your favorite
-        destinations. Whether by bus, train, plane, or launch, we have you
-        covered!
-      </p>
+    <section className="py-10 mx-auto">
+      {/* Heading */}
+      <div className="max-w-3xl mx-auto text-center mb-8 px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold">
+          Popular Routes
+        </h2>
+        <p className="mt-4 text-gray-600 text-sm sm:text-base">
+          Discover our most booked routes and travel comfortably to your
+          favorite destinations. Whether by bus, train, plane, or launch, we
+          have you covered!
+        </p>
+      </div>
 
+      {/* Swiper */}
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -93,18 +99,18 @@ const PopularRoutesSwiper = () => {
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="mySwiper"
         coverflowEffect={{
-          rotate: 30,
-          stretch: 50,
+          rotate: 20,
+          stretch: 0,
           depth: 100,
           modifier: 1,
-          scale: 0.75,
+          scale: 0.8,
           slideShadows: true,
         }}
         breakpoints={{
-          320: { slidesPerView: 1, spaceBetween: 20 }, // mobile
-          640: { slidesPerView: 2, spaceBetween: 30 }, // tablet
-          1024: { slidesPerView: 3, spaceBetween: 40 }, // desktop
-          1280: { slidesPerView: 4, spaceBetween: 50 }, // large screens
+          320: { slidesPerView: 1, spaceBetween: 15 }, // mobile
+          640: { slidesPerView: 2, spaceBetween: 20 }, // tablet
+          1024: { slidesPerView: 3, spaceBetween: 30 }, // desktop
+          1280: { slidesPerView: 4, spaceBetween: 40 }, // large screens
         }}
       >
         {routes.map((route) => (
@@ -113,11 +119,15 @@ const PopularRoutesSwiper = () => {
               <img
                 src={route.image}
                 alt={route.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 sm:h-56 md:h-64 object-cover"
               />
               <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold mb-2">{route.title}</h3>
-                <p className="text-gray-600">{route.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                  {route.title}
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base">
+                  {route.description}
+                </p>
               </div>
             </div>
           </SwiperSlide>

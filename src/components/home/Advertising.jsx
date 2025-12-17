@@ -3,14 +3,16 @@ import TicketCard from "./TicketCard";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../hooks/useAxios";
+import LoadingSpinner from "../shared/Spinner";
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
 };
 
 const Advertising = () => {
   const axios = useAxios();
+
   const {
     data: tickets = [],
     isLoading,
@@ -19,13 +21,11 @@ const Advertising = () => {
     queryKey: ["advertise-tickets"],
     queryFn: async () => {
       const res = await axios.get("/advertise");
-      return res.data; // array
+      return res.data;
     },
   });
 
-  if (isLoading) {
-    return <p className="text-center py-10">Loading featured tickets...</p>;
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   if (error) {
     return (
@@ -43,29 +43,44 @@ const Advertising = () => {
     );
   }
 
-  return (
-    <section className="container mx-auto py-8">
-      <h2 className="text-3xl font-bold mb-2 text-center">Featured Tickets</h2>
-      <h3 className="text-center text-gray-600 mb-6 text-lg">
-        Book your next journey effortlessly with our most popular travel
-        tickets.
-      </h3>
+  const advertises = tickets.slice(0, 6);
 
-      <div className="flex gap-6 overflow-x-auto py-4 px-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible">
-        {tickets.map((ticket) => (
+  return (
+    <section className="mt-10 py-10">
+      {/* Heading */}
+      <div className="max-w-3xl mx-auto text-center mb-8">
+        <h2 className="text-2xl md:text-5xl font-bold">Featured Tickets</h2>
+        <p className="text-gray-600 mt-2 text-sm sm:text-base">
+          Book your next journey effortlessly with our most popular travel
+          tickets.
+        </p>
+      </div>
+
+      {/* Cards Container */}
+      <motion.div
+        className="
+          h-[400px] overflow-y-auto
+          sm:h-auto sm:overflow-visible
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6
+          px-4
+        "
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+      >
+        {advertises.map((ticket) => (
           <motion.div
             key={ticket._id}
-            className="min-w-[250px] sm:min-w-full"
             variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            whileHover={{ scale: 1.03, y: -3 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="mb-4"
           >
             <TicketCard ticket={ticket} />
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

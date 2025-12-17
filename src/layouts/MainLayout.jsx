@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="max-w-screen-xl mx-auto w-screen px-5 md:px-9 lg:px-13  flex-1  ">
+      <div className="max-w-screen-xl mx-auto w-screen md:px-9 lg:px-13  flex-1  ">
         {state == "loading" ? <Loading /> : <Outlet />}
       </div>
       <Footer />

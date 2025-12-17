@@ -7,7 +7,7 @@ import Banner from "../../components/home/Banner";
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
       <Banner />
       <Advertising />
       <LatestTicketsSection />

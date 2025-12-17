@@ -9,7 +9,7 @@ const TicketCard = ({ ticket }) => {
   };
 
   return (
-    <div className=" rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className="rounded-sm md:rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <img
         src={ticket.image}
         alt={ticket.title}
