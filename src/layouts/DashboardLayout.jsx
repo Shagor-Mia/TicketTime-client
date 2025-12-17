@@ -5,11 +5,14 @@ import { AiOutlineHome } from "react-icons/ai";
 import { RiAdvertisementLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { SiGoogletasks } from "react-icons/si";
-import { FaTasks, FaUser, FaUserCheck } from "react-icons/fa";
+import { FaUser, FaUserCheck } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { FcApprove } from "react-icons/fc";
+import { MdAddTask } from "react-icons/md";
+import { FcManager } from "react-icons/fc";
 import useRole from "../hooks/useRole";
+import { SiVirustotal } from "react-icons/si";
 import Navbar from "../components/shared/Navbar";
 import logoImg from "../assets/bus1.png";
 
@@ -33,18 +36,18 @@ const DashboardLayout = () => {
   ];
 
   const vendorLinks = [
-    { to: "/dashboard/add-tickets", label: "Add Tickets", icon: <FaTasks /> },
+    { to: "/dashboard/add-tickets", label: "Add Tickets", icon: <MdAddTask /> },
     {
       to: "/dashboard/manage-orders",
-      label: "Manage Orders",
-      icon: <FaTasks />,
+      label: "Requested Bookings",
+      icon: <FcManager />,
     },
     {
       to: "/dashboard/my-added-tickets",
-      label: "My Tickets",
+      label: "My Added Tickets",
       icon: <SiGoogletasks />,
     },
-    { to: "/dashboard/revenue", label: "Revenue", icon: <SiGoogletasks /> },
+    { to: "/dashboard/revenue", label: "Revenue", icon: <SiVirustotal /> },
   ];
 
   const adminLinks = [

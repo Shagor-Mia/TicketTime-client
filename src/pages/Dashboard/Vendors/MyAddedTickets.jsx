@@ -90,12 +90,12 @@ const MyAddedTickets = () => {
           const isRejected = ticket.verificationStatus === "rejected";
 
           return (
-            <div key={ticket._id} className="card bg-base-100 shadow-md border">
-              <figure className="h-48">
+            <div key={ticket._id} className="card bg-base-100 shadow-md ">
+              <figure className="h-48 rounded-lg overflow-hidden">
                 <img
                   src={ticket.image}
                   alt={ticket.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full pt-2 px-2  object-cover"
                 />
               </figure>
 
@@ -119,7 +119,7 @@ const MyAddedTickets = () => {
                 </span>
 
                 {/* -------- ACTIONS -------- */}
-                <div className="card-actions justify-end mt-4">
+                <div className="card-actions  mt-4">
                   <button
                     className="btn btn-sm btn-info"
                     disabled={isRejected}
