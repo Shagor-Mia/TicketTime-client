@@ -32,7 +32,7 @@ const ApproveTickets = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto my-10 px-2">
+    <div className="max-w-7xl mx-auto my-10 px-2 dark:bg-black">
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">
         Ticket Approval Panel ({tickets.length})
       </h2>

@@ -156,7 +156,7 @@ const TicketDetails = () => {
               whileHover={{ scale: 1.01 }}
             />
 
-            <div className="space-y-1">
+            <div className="space-y-1 dark:text-black">
               <h1 className="text-2xl font-bold">{ticket.title}</h1>
               <p className="text-gray-600 text-lg">
                 {ticket.from} → {ticket.to}
@@ -204,21 +204,25 @@ const TicketDetails = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-xl font-semibold">Book This Ticket</h3>
+            <h3 className="text-xl font-semibold dark:text-black">
+              Book This Ticket
+            </h3>
 
-            <p className="font-medium">
+            <p className="font-medium dark:text-black">
               ⏳ Countdown:
               <span className="ml-2 text-blue-600">{timeLeft}</span>
             </p>
 
             <div>
-              <label className="block mb-1">Enter Quantity</label>
+              <label className="block mb-1 dark:text-black">
+                Enter Quantity
+              </label>
               <input
                 type="number"
                 min="1"
                 value={qty}
                 onChange={(e) => setQty(Number(e.target.value))}
-                className="border p-2 w-full rounded-lg"
+                className="border p-2 w-full rounded-lg dark:text-black"
               />
             </div>
 

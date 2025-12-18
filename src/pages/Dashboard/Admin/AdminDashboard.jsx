@@ -50,7 +50,7 @@ const AdminDashboard = () => {
 
   // ---------------- UI ----------------
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="max-w-7xl mx-auto px-4 py-10 dark:text-black">
       <h1 className="text-3xl font-bold mb-6 text-center">Overview</h1>
 
       {/* ---------------- Overview Cards ---------------- */}

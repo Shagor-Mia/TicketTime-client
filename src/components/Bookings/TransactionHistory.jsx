@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../shared/Spinner";
 
 const TransactionHistory = () => {
   const { user } = useAuth();
@@ -22,9 +23,9 @@ const TransactionHistory = () => {
     staleTime: 1000 * 60 * 5, // 5 min cache
   });
 
-  console.log(transactions);
+  // console.log(transactions);
   if (isLoading) {
-    return <p className="text-center py-10">Loading transactions...</p>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {
@@ -39,7 +40,7 @@ const TransactionHistory = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-6xl mx-auto p-6"
+      className="max-w-6xl mx-auto p-6 dark:text-black"
     >
       <h2 className="text-2xl font-bold mb-6">
         Transaction History({transactions.length})
@@ -50,7 +51,7 @@ const TransactionHistory = () => {
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full">
-            <thead className="bg-gray-100">
+            <thead className="bg-gray-100 dark:text-black">
               <tr>
                 <th>#</th>
                 <th>Transaction ID</th>

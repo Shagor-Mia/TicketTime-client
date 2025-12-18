@@ -61,11 +61,13 @@ const ProfilePage = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <h1 className="md:text-2xl text-base-content font-bold">
+            <h1 className="md:text-2xl text-base-content font-bold dark:text-black">
               {user?.displayName}
             </h1>
-            <p className="md:text-xl text-base-content py-3">{user?.email}</p>
-            <p className="md:text-xl text-base-content py-3">
+            <p className="md:text-xl text-base-content py-3 dark:text-black">
+              {user?.email}
+            </p>
+            <p className="md:text-xl text-base-content py-3 dark:text-black">
               Role: <span className="text-red-500 text-2xl">{role}</span>
             </p>
             <div className="mt-5">

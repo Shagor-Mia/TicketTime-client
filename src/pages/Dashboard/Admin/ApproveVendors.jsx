@@ -74,15 +74,15 @@ const ApproveVendors = () => {
   };
 
   return (
-    <div className="my-10 mx-auto max-w-6xl px-2">
+    <div className="my-10 mx-auto max-w-6xl px-2 dark:bg-black">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">
         Vendors Approval Pending: {vendors.length}
       </h1>
 
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto w-full ">
         <table className="table table-zebra w-full min-w-[600px]">
           <thead>
-            <tr>
+            <tr className="">
               <th>#</th>
               <th>Name</th>
               <th className="hidden sm:table-cell">Email</th>

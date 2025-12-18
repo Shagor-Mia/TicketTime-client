@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../../../components/shared/Spinner";
 
 const Advertise = () => {
   const axiosSecure = useSecureAxios();
@@ -56,7 +57,9 @@ const Advertise = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">All Tickets</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center dark:text-black">
+        All Tickets
+      </h2>
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center">
@@ -88,7 +91,7 @@ const Advertise = () => {
 
       {/* Tickets */}
       {isLoading ? (
-        <p className="text-center py-10">Loading tickets...</p>
+        <LoadingSpinner />
       ) : tickets.length === 0 ? (
         <p className="text-center py-10">No tickets found.</p>
       ) : (
@@ -108,12 +111,18 @@ const Advertise = () => {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-4 space-y-2">
-                  <h3 className="text-lg font-semibold">{ticket.title}</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-lg font-semibold dark:text-black">
+                    {ticket.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-black">
                     {ticket.from} → {ticket.to}
                   </p>
-                  <p className="text-sm">Transport: {ticket.transportType}</p>
-                  <p className="text-sm font-medium">Price: ${ticket.price}</p>
+                  <p className="text-sm dark:text-black">
+                    Transport: {ticket.transportType}
+                  </p>
+                  <p className="text-sm font-medium dark:text-black">
+                    Price: ${ticket.price}
+                  </p>
                   <p className="text-xs text-gray-500">
                     Vendor: {ticket.vendor?.name}
                   </p>

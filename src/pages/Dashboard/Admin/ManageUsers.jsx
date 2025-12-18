@@ -51,7 +51,7 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="my-10 mx-auto max-w-6xl px-2">
+    <div className="my-10 mx-auto max-w-6xl px-2 dark:bg-black">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold my-3 text-center">
         Manage Users ({users.length})
       </h1>
