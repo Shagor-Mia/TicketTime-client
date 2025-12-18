@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AllTicketCard from "../../components/AllTickets/AllTicketCard";
 import useSecureAxios from "../../hooks/useSecureAxios";
+import LoadingSpinner from "../../components/shared/Spinner";
 
 const AllTicket = () => {
   const axiosSecure = useSecureAxios();
@@ -32,8 +33,10 @@ const AllTicket = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">All Tickets</h2>
+    <div className="max-w-7xl mx-auto px-4 py-10 bg-blue-100">
+      <h2 className="text-3xl font-bold mb-6 text-center dark:text-black">
+        All Tickets
+      </h2>
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center">
@@ -65,7 +68,7 @@ const AllTicket = () => {
 
       {/* Tickets */}
       {isLoading ? (
-        <p className="text-center py-10">Loading tickets...</p>
+        <LoadingSpinner />
       ) : tickets.length === 0 ? (
         <p className="text-center py-10">No tickets found.</p>
       ) : (

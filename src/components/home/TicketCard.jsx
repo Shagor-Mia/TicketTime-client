@@ -16,7 +16,9 @@ const TicketCard = ({ ticket }) => {
         className="w-full h-48 object-cover"
       />
       <div className="p-4">
-        <h3 className="text-xl font-semibold mb-2">{ticket.title}</h3>
+        <h3 className="text-xl font-semibold mb-2 dark:text-black">
+          {ticket.title}
+        </h3>
         <p className="text-gray-600 mb-1">
           <strong>Total Ticket:</strong> {ticket.quantity}
         </p>
@@ -26,7 +28,7 @@ const TicketCard = ({ ticket }) => {
         <p className="text-gray-600 mb-1">
           <strong>Transport:</strong> {ticket.transportType}
         </p>
-        <p>
+        <p className="dark:text-black">
           <strong>Perks:</strong> {ticket.perks.join(", ")}
         </p>
 

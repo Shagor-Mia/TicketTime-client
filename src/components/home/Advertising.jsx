@@ -46,10 +46,12 @@ const Advertising = () => {
   const advertises = tickets.slice(0, 6);
 
   return (
-    <section className="mt-10 py-10">
+    <section className="mt-10 py-10 bg-amber-100 rounded-2xl">
       {/* Heading */}
       <div className="max-w-3xl mx-auto text-center mb-8">
-        <h2 className="text-2xl md:text-5xl font-bold">Featured Tickets</h2>
+        <h2 className="text-2xl md:text-5xl font-bold dark:text-black">
+          Featured Tickets
+        </h2>
         <p className="text-gray-600 mt-2 text-sm sm:text-base">
           Book your next journey effortlessly with our most popular travel
           tickets.

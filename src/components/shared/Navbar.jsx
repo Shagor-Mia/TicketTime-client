@@ -35,19 +35,8 @@ const Navbar = () => {
       </li>
 
       <li className=" mx-2">
-        <NavLink className={linkActive} to={"/About"}>
-          About Us
-        </NavLink>
-      </li>
-      <li className=" mx-2">
         <NavLink className={linkActive} to={"/contact"}>
           Contact Us
-        </NavLink>
-      </li>
-
-      <li className=" mx-2">
-        <NavLink className={linkActive} to={"/branch"}>
-          Branch
         </NavLink>
       </li>
 
@@ -65,6 +54,16 @@ const Navbar = () => {
           </li>
         </>
       )}
+      <li className=" mx-2">
+        <NavLink className={linkActive} to={"/branch"}>
+          Branch
+        </NavLink>
+      </li>
+      <li className=" mx-2">
+        <NavLink className={linkActive} to={"/About"}>
+          About Us
+        </NavLink>
+      </li>
     </>
   );
   return (

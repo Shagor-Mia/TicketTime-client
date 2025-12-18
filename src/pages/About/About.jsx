@@ -19,15 +19,15 @@ const cardVariants = {
 /* ================= COLOR MAP (TAILWIND SAFE) ================= */
 const colorMap = {
   blue: {
-    text: "text-blue-800",
+    text: "text-blue-800 dark:text-blue-300",
     btn: "bg-blue-600 hover:bg-blue-700",
   },
   green: {
-    text: "text-green-800",
+    text: "text-green-800 dark:text-green-300",
     btn: "bg-green-600 hover:bg-green-700",
   },
   yellow: {
-    text: "text-yellow-800",
+    text: "text-yellow-800 dark:text-yellow-300",
     btn: "bg-yellow-600 hover:bg-yellow-700",
   },
 };
@@ -37,21 +37,19 @@ const About = () => {
 
   return (
     <div
-      className=""
-      style={{
-        backgroundImage: `url(${bg1})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="relative min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${bg1})` }}
     >
-      <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
+      {/* Overlay for dark mode readability */}
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-12 space-y-16 text-white dark:text-gray-200">
         {/* ================= ABOUT US ================= */}
         <section>
-          <h2 className="text-2xl md:text-5xl font-bold text-center mb-5 md:mb-10 text-base-100">
+          <h2 className="text-2xl md:text-5xl font-bold text-center mb-5 md:mb-10">
             About Us
           </h2>
-          <p className="text-center text-base-100 max-w-3xl mx-auto text-sm md:text-base mb-5 md:mb-10">
+          <p className="text-center max-w-3xl mx-auto text-sm md:text-base mb-5 md:mb-10">
             At TicketTime, we simplify travel by combining convenience,
             security, and reliability. From quick bookings to real-time support,
             we ensure every journey is smooth from start to finish.
@@ -61,9 +59,9 @@ const About = () => {
             {[img1, img2, img3].map((img, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-5 md:p-6 rounded-xl shadow-md
-                         flex flex-col sm:flex-row gap-4 sm:gap-6 items-center
-                         hover:shadow-xl transition"
+                className="bg-white dark:bg-gray-800 p-5 md:p-6 rounded-xl shadow-md
+                           flex flex-col sm:flex-row gap-4 sm:gap-6 items-center
+                           hover:shadow-xl transition"
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -76,15 +74,15 @@ const About = () => {
                   className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
                 />
 
-                <div className="hidden sm:block border-l-2 border-dashed h-16"></div>
+                <div className="hidden sm:block border-l-2 border-dashed h-16 dark:border-gray-400"></div>
 
                 <div className="text-center sm:text-left">
-                  <h3 className="text-lg md:text-2xl font-semibold mb-1 md:mb-2">
+                  <h3 className="text-lg md:text-2xl font-semibold mb-1 md:mb-2 text-gray-900 dark:text-gray-100">
                     {index === 0 && "Easy Ticket Booking"}
                     {index === 1 && "Secure Payment"}
                     {index === 2 && "24/7 Customer Support"}
                   </h3>
-                  <p className="text-sm md:text-base text-gray-600">
+                  <p className="text-sm md:text-base text-gray-700 dark:text-gray-300">
                     {index === 0 &&
                       "Discover and book bus, train, launch, or flight tickets effortlessly with just a few clicks."}
                     {index === 1 &&
@@ -109,7 +107,6 @@ const About = () => {
             user={user}
             to={"/contact"}
           />
-
           <ServiceCard
             img={quickBookingImg}
             title="Quick Booking"
@@ -119,7 +116,6 @@ const About = () => {
             user={user}
             to={"/ticket"}
           />
-
           <ServiceCard
             img={supportImg}
             title="Customer Support"
@@ -141,7 +137,7 @@ const ServiceCard = ({ img, title, desc, btn, color, user, to }) => {
 
   return (
     <motion.section
-      className="bg-green-50 rounded-xl p-6 md:p-8 shadow-md
+      className="bg-green-50 dark:bg-gray-800 rounded-xl p-6 md:p-8 shadow-md
                  flex flex-col items-center text-center
                  hover:shadow-xl transition"
       initial="hidden"
@@ -156,13 +152,14 @@ const ServiceCard = ({ img, title, desc, btn, color, user, to }) => {
         {title}
       </h3>
 
-      <p className="text-sm md:text-base text-gray-600 mb-4">{desc}</p>
+      <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 mb-4">
+        {desc}
+      </p>
 
       {user && (
         <Link
           to={`${to}`}
-          className={`w-full md:w-auto ${styles.btn}
-                      text-white px-6 py-2 rounded-lg font-semibold`}
+          className={`w-full md:w-auto ${styles.btn} text-white px-6 py-2 rounded-lg font-semibold`}
         >
           {btn}
         </Link>

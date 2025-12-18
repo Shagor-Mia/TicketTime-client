@@ -53,7 +53,7 @@ const cardVariants = {
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-12 sm:py-16 bg-gray-50">
+    <section className="py-10 mt-10 md:rounded-2xl rounded-xl bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
@@ -63,7 +63,9 @@ const WhyChooseUs = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl md:text-5xl  font-bold">Why Choose Us?</h2>
+          <h2 className="text-2xl md:text-5xl  font-bold dark:text-black">
+            Why Choose Us?
+          </h2>
           <p className="mt-4 text-gray-600 text-sm sm:text-base">
             We make your travel experience easier, safer, and faster with
             trusted services and multiple transport options.
@@ -98,7 +100,7 @@ const WhyChooseUs = () => {
                 {benefit.icon}
               </motion.div>
 
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 dark:text-black">
                 {benefit.title}
               </h3>
               <p className="text-gray-600 text-sm sm:text-base">

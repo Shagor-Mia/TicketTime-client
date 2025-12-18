@@ -38,59 +38,61 @@ const Branch = () => {
 
   return (
     <div
-      className=""
-      style={{
-        backgroundImage: `url(${bg1})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${bg1})` }}
     >
-      <h1 className="text-center text-2xl md:text-5xl py-10 font-bold text-white">
-        Our Branch Coverage
-      </h1>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
 
-      {/* ================= FILTER BUTTONS ================= */}
-      <div className="flex justify-center gap-3 flex-wrap">
-        {["all", "bus", "train", "air"].map((item) => (
-          <button
-            key={item}
-            onClick={() => setFilter(item)}
-            className={`px-5 py-2 rounded-full font-semibold transition
-              ${
-                filter === item
-                  ? "bg-green-600 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-          >
-            {item.toUpperCase()}
-          </button>
-        ))}
-      </div>
+      <div className="relative z-10 max-w-7xl mx-auto py-10 px-5 md:px-10">
+        <h1 className="text-center text-2xl md:text-5xl font-bold text-white mb-10">
+          Our Branch Coverage
+        </h1>
 
-      {/* ================= MAP ================= */}
-      <div className="max-w-5xl mx-auto h-[500px] rounded-xl overflow-hidden py-10 ">
-        <MapContainer
-          center={[23.685, 90.3563]} // Bangladesh center
-          zoom={7}
-          scrollWheelZoom={false}
-          className="h-full w-full"
-          ref={mapRef}
-        >
-          <TileLayer
-            attribution="&copy; OpenStreetMap contributors"
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-
-          {filteredCounters.map((c, index) => (
-            <Marker key={index} position={[c.lat, c.lon]}>
-              <Popup>
-                <strong>{c.name}</strong>
-                <br />
-                Available: {c.type}
-              </Popup>
-            </Marker>
+        {/* ================= FILTER BUTTONS ================= */}
+        <div className="flex justify-center gap-3 flex-wrap mb-8">
+          {["all", "bus", "train", "air"].map((item) => (
+            <button
+              key={item}
+              onClick={() => setFilter(item)}
+              className={`px-5 py-2 rounded-full font-semibold transition
+                ${
+                  filter === item
+                    ? "bg-green-600 text-white"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+                }`}
+            >
+              {item.toUpperCase()}
+            </button>
           ))}
-        </MapContainer>
+        </div>
+
+        {/* ================= MAP ================= */}
+        <div className="max-w-5xl mx-auto h-[500px] rounded-xl overflow-hidden shadow-lg">
+          <MapContainer
+            center={[23.685, 90.3563]} // Bangladesh center
+            zoom={7}
+            scrollWheelZoom={false}
+            className="h-full w-full rounded-xl"
+            ref={mapRef}
+          >
+            <TileLayer
+              attribution="&copy; OpenStreetMap contributors"
+              // Darkmap tiles for better darkmode support
+              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            />
+
+            {filteredCounters.map((c, index) => (
+              <Marker key={index} position={[c.lat, c.lon]}>
+                <Popup>
+                  <strong>{c.name}</strong>
+                  <br />
+                  Available: {c.type}
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
       </div>
     </div>
   );

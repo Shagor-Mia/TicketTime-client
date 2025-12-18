@@ -20,7 +20,7 @@ const AnimatedBannerSwiper = () => {
   const { user } = useAuth();
 
   return (
-    <section className="relative w-full  mt-10 px-4 ">
+    <section className="relative w-full  mt-10 px-4 md:px-0 ">
       <div className="relative rounded-xl md:rounded-2xl overflow-hidden">
         <Swiper
           effect="fade"

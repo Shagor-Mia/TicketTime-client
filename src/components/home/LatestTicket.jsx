@@ -40,7 +40,7 @@ const LatestTicketsSection = () => {
   const latestTickets = data?.tickets?.slice(0, 6) || [];
 
   return (
-    <section className="py-10 ">
+    <section className="py-10 mt-10 md:rounded-2xl rounded-2xl bg-blue-100">
       <div className=" mx-auto ">
         {/* Heading */}
         <motion.div

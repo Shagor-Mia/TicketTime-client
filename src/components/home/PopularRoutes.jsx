@@ -81,7 +81,7 @@ const routes = [
 
 const PopularRoutesSwiper = () => {
   return (
-    <section className="py-10 mx-auto px-4">
+    <section className="py-10 mt-10 mx-auto px-4">
       {/* Heading */}
       <div className="max-w-3xl mx-auto text-center mb-8 px-4 md:px-8">
         <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold">

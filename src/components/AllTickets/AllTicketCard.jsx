@@ -15,13 +15,19 @@ const AllTicketCard = ({ ticket }) => {
         <img src={ticket.image} className="w-full h-48 object-cover" />
 
         <div className="p-4 space-y-2">
-          <h3 className="text-lg font-semibold">{ticket.title}</h3>
+          <h3 className="text-lg font-semibold dark:text-black">
+            {ticket.title}
+          </h3>
           <p className="text-gray-600">
             {ticket.from} → {ticket.to}
           </p>
-          <p className="text-sm">Transport: {ticket.transportType}</p>
-          <p className="font-semibold">৳ {ticket.price}</p>
-          <p className="text-sm">Available: {ticket.quantity}</p>
+          <p className="text-sm dark:text-black">
+            Transport: {ticket.transportType}
+          </p>
+          <p className="font-semibold dark:text-black">৳ {ticket.price}</p>
+          <p className="text-sm dark:text-black">
+            Available: {ticket.quantity}
+          </p>
 
           {/* Departure date and time */}
           <p className="text-sm text-gray-700">

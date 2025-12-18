@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
+import bg3 from "../../assets/bg3.jpg";
 
 const TicketDetails = () => {
   const { id } = useParams();
@@ -118,115 +119,124 @@ const TicketDetails = () => {
 
   /* ---------------- UI ---------------- */
   return (
-    <motion.div
-      className="max-w-6xl mx-auto px-4 py-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
+    <div
+      style={{
+        backgroundImage: `url(${bg3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
-      {/* Back */}
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-4 px-4 py-2 bg-gray-200 rounded-lg"
+      <motion.div
+        className="max-w-6xl mx-auto px-4 py-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
       >
-        ← Back
-      </button>
-
-      <div className="flex flex-col md:flex-row gap-10">
-        {/* LEFT: Image & Main Info */}
-        <motion.div
-          className="space-y-4 md:w-1/2"
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+        {/* Back */}
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-4 px-4 py-2 bg-gray-200 rounded-lg"
         >
-          <motion.img
-            src={ticket.image}
-            alt={ticket.title}
-            className="rounded-2xl shadow-md w-full h-[320px] object-cover"
-            whileHover={{ scale: 1.01 }}
-          />
+          ← Back
+        </button>
 
-          <div className="space-y-1">
-            <h1 className="text-2xl font-bold">{ticket.title}</h1>
-            <p className="text-gray-600 text-lg">
-              {ticket.from} → {ticket.to}
-            </p>
-            <p>
-              Transport:
-              <span className="font-semibold"> {ticket.transportType}</span>
-            </p>
-            <p>
-              Price:
-              <span className="font-semibold"> ৳{ticket.price}</span>
-            </p>
-            <p>
-              Available:
-              <span className="font-semibold"> {ticket.quantity}</span>
-            </p>
-          </div>
-
-          {/* Perks */}
-          <div className="flex gap-2 flex-wrap text-xs">
-            {ticket.perks.map((p, i) => (
-              <span
-                key={i}
-                className="bg-gray-100 px-3 py-1 rounded-full text-gray-600"
-              >
-                {p}
-              </span>
-            ))}
-          </div>
-
-          {/* Departure */}
-          <p className="text-gray-500">
-            Departure: {new Date(ticket.departure).toLocaleDateString()} at{" "}
-            {new Date(ticket.departure).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </p>
-        </motion.div>
-
-        {/* RIGHT: Booking Section */}
-        <motion.div
-          className="md:w-1/2 bg-white shadow-md rounded-xl md:rounded-2xl p-6 space-y-4"
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h3 className="text-xl font-semibold">Book This Ticket</h3>
-
-          <p className="font-medium">
-            ⏳ Countdown:
-            <span className="ml-2 text-blue-600">{timeLeft}</span>
-          </p>
-
-          <div>
-            <label className="block mb-1">Enter Quantity</label>
-            <input
-              type="number"
-              min="1"
-              value={qty}
-              onChange={(e) => setQty(Number(e.target.value))}
-              className="border p-2 w-full rounded-lg"
-            />
-          </div>
-
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-
-          <button
-            disabled={disabled}
-            onClick={handleBooking}
-            className={`w-full p-3 rounded-lg text-white ${
-              disabled ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-            }`}
+        <div className="flex flex-col md:flex-row gap-10">
+          {/* LEFT: Image & Main Info */}
+          <motion.div
+            className="space-y-4 md:w-1/2"
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            Book Now
-          </button>
-        </motion.div>
-      </div>
-    </motion.div>
+            <motion.img
+              src={ticket.image}
+              alt={ticket.title}
+              className="rounded-2xl shadow-md w-full h-[320px] object-cover"
+              whileHover={{ scale: 1.01 }}
+            />
+
+            <div className="space-y-1">
+              <h1 className="text-2xl font-bold">{ticket.title}</h1>
+              <p className="text-gray-600 text-lg">
+                {ticket.from} → {ticket.to}
+              </p>
+              <p>
+                Transport:
+                <span className="font-semibold"> {ticket.transportType}</span>
+              </p>
+              <p>
+                Price:
+                <span className="font-semibold"> ৳{ticket.price}</span>
+              </p>
+              <p>
+                Available:
+                <span className="font-semibold"> {ticket.quantity}</span>
+              </p>
+            </div>
+
+            {/* Perks */}
+            <div className="flex gap-2 flex-wrap text-xs">
+              {ticket.perks.map((p, i) => (
+                <span
+                  key={i}
+                  className="bg-gray-100 px-3 py-1 rounded-full text-gray-600"
+                >
+                  {p}
+                </span>
+              ))}
+            </div>
+
+            {/* Departure */}
+            <p className="text-gray-500">
+              Departure: {new Date(ticket.departure).toLocaleDateString()} at{" "}
+              {new Date(ticket.departure).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+          </motion.div>
+
+          {/* RIGHT: Booking Section */}
+          <motion.div
+            className="md:w-1/2 bg-white shadow-md rounded-xl md:rounded-2xl p-6 space-y-4"
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-xl font-semibold">Book This Ticket</h3>
+
+            <p className="font-medium">
+              ⏳ Countdown:
+              <span className="ml-2 text-blue-600">{timeLeft}</span>
+            </p>
+
+            <div>
+              <label className="block mb-1">Enter Quantity</label>
+              <input
+                type="number"
+                min="1"
+                value={qty}
+                onChange={(e) => setQty(Number(e.target.value))}
+                className="border p-2 w-full rounded-lg"
+              />
+            </div>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+
+            <button
+              disabled={disabled}
+              onClick={handleBooking}
+              className={`w-full p-3 rounded-lg text-white ${
+                disabled ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+              }`}
+            >
+              Book Now
+            </button>
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
