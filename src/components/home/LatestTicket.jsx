@@ -4,6 +4,7 @@ import useSecureAxios from "../../hooks/useSecureAxios";
 import LoadingSpinner from "../shared/Spinner";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,6 +24,7 @@ const cardVariants = {
 };
 
 const LatestTicketsSection = () => {
+  const { user } = useAuth();
   const axiosSecure = useSecureAxios();
 
   const { data, isLoading } = useQuery({
@@ -86,15 +88,17 @@ const LatestTicketsSection = () => {
           )}
         </motion.div>
       </div>
-      <div className="mt-10 text-center">
-        <Link
-          className="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-lg font-semibold text-sm sm:text-base text-white"
-          to={"/ticket"}
-        >
-          {" "}
-          More..
-        </Link>
-      </div>
+      {user && (
+        <div className="mt-10 text-center">
+          <Link
+            className="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-lg font-semibold text-sm sm:text-base text-white"
+            to={"/ticket"}
+          >
+            {" "}
+            More..
+          </Link>
+        </div>
+      )}
     </section>
   );
 };

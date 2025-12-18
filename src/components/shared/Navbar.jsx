@@ -33,14 +33,15 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      <li className=" mx-2">
-        <NavLink className={linkActive} to={"/ticket"}>
-          All Ticket
-        </NavLink>
-      </li>
+
       <li className=" mx-2">
         <NavLink className={linkActive} to={"/About"}>
           About Us
+        </NavLink>
+      </li>
+      <li className=" mx-2">
+        <NavLink className={linkActive} to={"/contact"}>
+          Contact Us
         </NavLink>
       </li>
 
@@ -53,8 +54,8 @@ const Navbar = () => {
       {user && (
         <>
           <li className=" mx-2">
-            <NavLink className={linkActive} to={"/contact"}>
-              Contact Us
+            <NavLink className={linkActive} to={"/ticket"}>
+              All Ticket
             </NavLink>
           </li>
           <li className=" mx-2">

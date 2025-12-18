@@ -60,7 +60,7 @@ const Branch = () => {
       </div>
 
       {/* ================= MAP ================= */}
-      <div className="max-w-6xl mx-auto h-[500px] border rounded-xl overflow-hidden">
+      <div className="max-w-6xl mx-auto h-[500px]  rounded-xl overflow-hidden">
         <MapContainer
           center={[23.685, 90.3563]} // Bangladesh center
           zoom={7}
