@@ -29,7 +29,7 @@ const AnimatedBannerSwiper = () => {
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           modules={[Autoplay, Pagination, EffectFade]}
-          className="h-[60vh] sm:h-[70vh] lg:h-[80vh]"
+          className="h-[60vh]  md:h-[70vh]"
         >
           {banners.map((img, index) => (
             <SwiperSlide key={index}>

@@ -24,7 +24,7 @@ const Advertising = () => {
       return res.data;
     },
   });
-
+  console.log(tickets);
   if (isLoading) return <LoadingSpinner />;
 
   if (error) {

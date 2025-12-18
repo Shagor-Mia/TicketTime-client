@@ -4,66 +4,76 @@ import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import bus1 from "../../assets/unique1.jpg";
+import bus2 from "../../assets/green1.jpg";
+import bus3 from "../../assets/hanif1.jpg";
+import bus4 from "../../assets/saudia1.jpg";
+import bus5 from "../../assets/star1.jpg";
+import bus6 from "../../assets/bus1.png";
+import plan1 from "../../assets/plan1.jpg";
+import plan2 from "../../assets/plan2.jpg";
+import train1 from "../../assets/train1.jpg";
+import train2 from "../../assets/train2.jpg";
 
 // Sample popular routes
 const routes = [
   {
     id: 1,
-    image: "/images/route1.jpg",
+    image: bus1,
     title: "Dhaka → Chittagong",
     description: "Fastest and most comfortable route by bus and train.",
   },
   {
     id: 2,
-    image: "/images/route2.jpg",
+    image: bus3,
     title: "Dhaka → Sylhet",
     description: "Scenic route, perfect for weekend getaways.",
   },
   {
     id: 3,
-    image: "/images/route3.jpg",
+    image: bus2,
     title: "Dhaka → Cox's Bazar",
     description: "Popular beach destination with flights and buses.",
   },
   {
     id: 4,
-    image: "/images/route4.jpg",
+    image: bus4,
     title: "Dhaka → Khulna",
     description: "Reliable trains and buses with affordable prices.",
   },
   {
     id: 5,
-    image: "/images/route5.jpg",
+    image: plan1,
     title: "Dhaka → Kolkata (Flight)",
     description: "International flight, quick and comfortable journey.",
   },
   {
     id: 6,
-    image: "/images/route6.jpg",
+    image: plan2,
     title: "Dhaka → Mumbai (Flight)",
     description: "Direct international flight with in-flight amenities.",
   },
   {
     id: 7,
-    image: "/images/route7.jpg",
+    image: bus5,
     title: "Dhaka → Barisal",
     description: "Scenic bus route along rivers and lush landscapes.",
   },
   {
     id: 8,
-    image: "/images/route8.jpg",
+    image: train1,
     title: "Dhaka → Rajshahi",
     description: "Express train with comfortable AC coaches.",
   },
   {
     id: 9,
-    image: "/images/route9.jpg",
+    image: train2,
     title: "Dhaka → Singapore (Flight)",
     description: "International flight, premium services onboard.",
   },
   {
     id: 10,
-    image: "/images/route10.jpg",
+    image: bus6,
     title: "Dhaka → Narayanganj",
     description: "Short bus route, frequent departures daily.",
   },
@@ -71,9 +81,9 @@ const routes = [
 
 const PopularRoutesSwiper = () => {
   return (
-    <section className="py-10 mx-auto">
+    <section className="py-10 mx-auto px-4">
       {/* Heading */}
-      <div className="max-w-3xl mx-auto text-center mb-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto text-center mb-8 px-4 md:px-8">
         <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold">
           Popular Routes
         </h2>
@@ -119,7 +129,7 @@ const PopularRoutesSwiper = () => {
               <img
                 src={route.image}
                 alt={route.title}
-                className="w-full h-48 sm:h-56 md:h-64 object-cover"
+                className="w-full h-48  md:h-64 object-cover"
               />
               <div className="p-4 text-center">
                 <h3 className="text-lg sm:text-xl font-semibold mb-2">

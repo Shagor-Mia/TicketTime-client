@@ -139,41 +139,33 @@ export const router = createBrowserRouter([
       {
         path: "manage-users",
         element: (
-          <PrivateRouter>
-            <AdminRouter>
-              <ManageUsers />
-            </AdminRouter>
-          </PrivateRouter>
+          <AdminRouter>
+            <ManageUsers />
+          </AdminRouter>
         ),
       },
       {
         path: "approve-vendors",
         element: (
-          <PrivateRouter>
-            <AdminRouter>
-              <ApproveVendors />
-            </AdminRouter>
-          </PrivateRouter>
+          <AdminRouter>
+            <ApproveVendors />
+          </AdminRouter>
         ),
       },
       {
         path: "approve-ticket",
         element: (
-          <PrivateRouter>
-            <AdminRouter>
-              <ApprovedTicket />
-            </AdminRouter>
-          </PrivateRouter>
+          <AdminRouter>
+            <ApprovedTicket />
+          </AdminRouter>
         ),
       },
       {
         path: "advertise",
         element: (
-          <PrivateRouter>
-            <AdminRouter>
-              <Advertise />
-            </AdminRouter>
-          </PrivateRouter>
+          <AdminRouter>
+            <Advertise />
+          </AdminRouter>
         ),
       },
 

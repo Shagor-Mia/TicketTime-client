@@ -37,7 +37,7 @@ const Contact = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-base-100 py-16 px-5 md:px-10"
+      className=" bg-base-100 md:py-16 py-5 px-5 md:px-10"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
         {/* Left: Contact Info */}

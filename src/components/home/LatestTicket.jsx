@@ -3,6 +3,7 @@ import AllTicketCard from "../../components/AllTickets/AllTicketCard";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import LoadingSpinner from "../shared/Spinner";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -24,7 +25,7 @@ const cardVariants = {
 const LatestTicketsSection = () => {
   const axiosSecure = useSecureAxios();
 
-  const { data: tickets = [], isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["latestTickets"],
     queryFn: async () => {
       const res = await axiosSecure.get("/tickets/approved");
@@ -34,7 +35,7 @@ const LatestTicketsSection = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
-  const latestTickets = tickets.slice(0, 6);
+  const latestTickets = data?.tickets?.slice(0, 6) || [];
 
   return (
     <section className="py-10 ">
@@ -84,6 +85,15 @@ const LatestTicketsSection = () => {
             </p>
           )}
         </motion.div>
+      </div>
+      <div className="mt-10 text-center">
+        <Link
+          className="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-lg font-semibold text-sm sm:text-base text-white"
+          to={"/ticket"}
+        >
+          {" "}
+          More..
+        </Link>
       </div>
     </section>
   );

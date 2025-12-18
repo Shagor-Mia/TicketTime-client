@@ -190,7 +190,7 @@ const TicketDetails = () => {
 
         {/* RIGHT: Booking Section */}
         <motion.div
-          className="md:w-1/2 bg-white shadow-md rounded-2xl p-6 space-y-4"
+          className="md:w-1/2 bg-white shadow-md rounded-xl md:rounded-2xl p-6 space-y-4"
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}

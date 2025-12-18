@@ -17,16 +17,22 @@ const TicketCard = ({ ticket }) => {
       />
       <div className="p-4">
         <h3 className="text-xl font-semibold mb-2">{ticket.title}</h3>
-
+        <p className="text-gray-600 mb-1">
+          <strong>Total Ticket:</strong> {ticket.quantity}
+        </p>
+        <p className="text-gray-600 mb-1">
+          <strong>Unit Price:</strong> {ticket.price}
+        </p>
         <p className="text-gray-600 mb-1">
           <strong>Transport:</strong> {ticket.transportType}
         </p>
-        <p className="text-gray-600 mb-4">
-          <strong>Perks:</strong> {ticket.perks}
+        <p>
+          <strong>Perks:</strong> {ticket.perks.join(", ")}
         </p>
+
         <button
           onClick={handleSeeDetails}
-          className="bg-blue-600 text-white w-full px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
+          className="bg-blue-600 text-white w-full px-4 py-2 mt-2 rounded hover:bg-blue-700 transition-colors duration-300"
         >
           See Details
         </button>

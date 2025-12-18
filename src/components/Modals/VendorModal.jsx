@@ -27,7 +27,7 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
             className="modal-box relative bg-base-100 text-base-content md:rounded-2xl rounded-xl shadow-2xl"
           >
             <h3 className="font-bold text-2xl text-center text-purple-700 mb-4">
-              Rider Details
+              Seller Details
             </h3>
 
             <div className="space-y-2">

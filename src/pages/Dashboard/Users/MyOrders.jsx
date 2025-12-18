@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import useSecureAxios from "../../../hooks/useSecureAxios";
@@ -6,11 +7,7 @@ import LoadingSpinner from "../../../components/shared/Spinner";
 
 const containerVariants = {
   hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15, // stagger each card
-    },
-  },
+  show: { transition: { staggerChildren: 0.15 } },
 };
 
 const itemVariants = {
@@ -20,24 +17,63 @@ const itemVariants = {
 
 const MyOrders = () => {
   const axiosSecure = useSecureAxios();
+  const [page, setPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
+  const [transportType, setTransportType] = useState("");
+  const limit = 6;
 
-  const { data: bookings = [], isLoading } = useQuery({
-    queryKey: ["my-bookings"],
+  const { data, isLoading } = useQuery({
+    queryKey: ["my-bookings", page, searchText, transportType],
     queryFn: async () => {
-      const res = await axiosSecure.get("/bookings/user");
+      const res = await axiosSecure.get("/bookings/user", {
+        params: { page, limit, searchText, transportType },
+      });
       return res.data;
     },
+    keepPreviousData: true,
   });
 
   if (isLoading) return <LoadingSpinner />;
 
+  const bookings = data?.bookings || [];
+  const totalPages = data?.totalPages || 1;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-      <h2 className="text-3xl font-bold mb-6">My Booked Tickets</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">My Booked Tickets</h2>
 
+      {/* Search + Filter */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center">
+        <input
+          type="text"
+          placeholder="Search tickets..."
+          value={searchText}
+          onChange={(e) => {
+            setPage(1);
+            setSearchText(e.target.value);
+          }}
+          className="input input-bordered w-full sm:w-64"
+        />
+
+        <select
+          value={transportType}
+          onChange={(e) => {
+            setPage(1);
+            setTransportType(e.target.value);
+          }}
+          className="select select-bordered w-full sm:w-64"
+        >
+          <option value="">All Transport Types</option>
+          <option value="Bus">Bus</option>
+          <option value="Flight">Flight</option>
+          <option value="Train">Train</option>
+        </select>
+      </div>
+
+      {/* Bookings */}
       {bookings.length === 0 ? (
         <p className="text-center text-gray-500">
-          You have not booked any tickets yet.
+          No bookings found for the selected filters.
         </p>
       ) : (
         <motion.div
@@ -52,6 +88,31 @@ const MyOrders = () => {
             </motion.div>
           ))}
         </motion.div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center gap-3 mt-8">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((p) => p - 1)}
+            className="btn btn-outline"
+          >
+            Prev
+          </button>
+
+          <span className="flex items-center">
+            Page {page} of {totalPages}
+          </span>
+
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage((p) => p + 1)}
+            className="btn btn-outline"
+          >
+            Next
+          </button>
+        </div>
       )}
     </div>
   );
