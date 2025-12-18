@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import bg1 from "../../assets/bg1.jpg";
 
 /* ================= COUNTERS DATA ================= */
 const counters = [
@@ -36,8 +37,15 @@ const Branch = () => {
   }, [filter]);
 
   return (
-    <div className="my-16 space-y-8">
-      <h1 className="text-center text-2xl md:text-4xl font-bold">
+    <div
+      className=""
+      style={{
+        backgroundImage: `url(${bg1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <h1 className="text-center text-2xl md:text-5xl py-10 font-bold text-white">
         Our Branch Coverage
       </h1>
 
@@ -60,7 +68,7 @@ const Branch = () => {
       </div>
 
       {/* ================= MAP ================= */}
-      <div className="max-w-6xl mx-auto h-[500px]  rounded-xl overflow-hidden">
+      <div className="max-w-5xl mx-auto h-[500px] rounded-xl overflow-hidden py-10 ">
         <MapContainer
           center={[23.685, 90.3563]} // Bangladesh center
           zoom={7}

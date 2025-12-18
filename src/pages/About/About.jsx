@@ -8,6 +8,7 @@ import quickBookingImg from "../../assets/bus1.jpg";
 import supportImg from "../../assets/bus1.jpg";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router";
+import bg1 from "../../assets/bg1.jpg";
 
 /* ================= ANIMATION ================= */
 const cardVariants = {
@@ -35,90 +36,100 @@ const About = () => {
   const { user } = useAuth();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
-      {/* ================= ABOUT US ================= */}
-      <section>
-        <h2 className="text-2xl md:text-5xl font-bold text-center mb-5 md:mb-10">
-          About Us
-        </h2>
-        <p className="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base mb-5 md:mb-10">
-          At TicketTime, we simplify travel by combining convenience, security,
-          and reliability. From quick bookings to real-time support, we ensure
-          every journey is smooth from start to finish.
-        </p>
+    <div
+      className=""
+      style={{
+        backgroundImage: `url(${bg1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
+        {/* ================= ABOUT US ================= */}
+        <section>
+          <h2 className="text-2xl md:text-5xl font-bold text-center mb-5 md:mb-10 text-base-100">
+            About Us
+          </h2>
+          <p className="text-center text-base-100 max-w-3xl mx-auto text-sm md:text-base mb-5 md:mb-10">
+            At TicketTime, we simplify travel by combining convenience,
+            security, and reliability. From quick bookings to real-time support,
+            we ensure every journey is smooth from start to finish.
+          </p>
 
-        <div className="space-y-6">
-          {[img1, img2, img3].map((img, index) => (
-            <motion.div
-              key={index}
-              className="bg-white p-5 md:p-6 rounded-xl shadow-md
+          <div className="space-y-6">
+            {[img1, img2, img3].map((img, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-5 md:p-6 rounded-xl shadow-md
                          flex flex-col sm:flex-row gap-4 sm:gap-6 items-center
                          hover:shadow-xl transition"
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-            >
-              <img
-                src={img}
-                alt="Feature"
-                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
-              />
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+              >
+                <img
+                  src={img}
+                  alt="Feature"
+                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
+                />
 
-              <div className="hidden sm:block border-l-2 border-dashed h-16"></div>
+                <div className="hidden sm:block border-l-2 border-dashed h-16"></div>
 
-              <div className="text-center sm:text-left">
-                <h3 className="text-lg md:text-2xl font-semibold mb-1 md:mb-2">
-                  {index === 0 && "Easy Ticket Booking"}
-                  {index === 1 && "Secure Payment"}
-                  {index === 2 && "24/7 Customer Support"}
-                </h3>
-                <p className="text-sm md:text-base text-gray-600">
-                  {index === 0 &&
-                    "Discover and book bus, train, launch, or flight tickets effortlessly with just a few clicks."}
-                  {index === 1 &&
-                    "Safe and reliable payments with cards, mobile banking, and digital wallets."}
-                  {index === 2 &&
-                    "Our support team is available 24/7 to help with bookings or issues."}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+                <div className="text-center sm:text-left">
+                  <h3 className="text-lg md:text-2xl font-semibold mb-1 md:mb-2">
+                    {index === 0 && "Easy Ticket Booking"}
+                    {index === 1 && "Secure Payment"}
+                    {index === 2 && "24/7 Customer Support"}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-600">
+                    {index === 0 &&
+                      "Discover and book bus, train, launch, or flight tickets effortlessly with just a few clicks."}
+                    {index === 1 &&
+                      "Safe and reliable payments with cards, mobile banking, and digital wallets."}
+                    {index === 2 &&
+                      "Our support team is available 24/7 to help with bookings or issues."}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= SERVICES ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <ServiceCard
+            img={contactImg}
+            title="Contact Us"
+            desc="Reach out via email, phone, or live chat for booking help."
+            btn="Contact Now"
+            color="blue"
+            user={user}
+            to={"/contact"}
+          />
+
+          <ServiceCard
+            img={quickBookingImg}
+            title="Quick Booking"
+            desc="Need tickets urgently? Book instantly with emergency booking."
+            btn="Book Now"
+            color="green"
+            user={user}
+            to={"/ticket"}
+          />
+
+          <ServiceCard
+            img={supportImg}
+            title="Customer Support"
+            desc="Submit complaints and get fast resolution from our team."
+            btn="Submit Issue"
+            color="yellow"
+            user={user}
+            to={"/contact"}
+          />
         </div>
-      </section>
-
-      {/* ================= SERVICES ================= */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-        <ServiceCard
-          img={contactImg}
-          title="Contact Us"
-          desc="Reach out via email, phone, or live chat for booking help."
-          btn="Contact Now"
-          color="blue"
-          user={user}
-          to={"/contact"}
-        />
-
-        <ServiceCard
-          img={quickBookingImg}
-          title="Quick Booking"
-          desc="Need tickets urgently? Book instantly with emergency booking."
-          btn="Book Now"
-          color="green"
-          user={user}
-          to={"/ticket"}
-        />
-
-        <ServiceCard
-          img={supportImg}
-          title="Customer Support"
-          desc="Submit complaints and get fast resolution from our team."
-          btn="Submit Issue"
-          color="yellow"
-          user={user}
-          to={"/contact"}
-        />
       </div>
     </div>
   );

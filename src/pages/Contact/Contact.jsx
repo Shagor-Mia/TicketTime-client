@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import bg2 from "../../assets/bg2.jpg";
 
 const Contact = () => {
   // Form state
@@ -37,7 +38,13 @@ const Contact = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className=" bg-base-100 md:py-16 py-5 px-5 md:px-10"
+      className=" md:py-16 py-5 px-5 md:px-10"
+      style={{
+        backgroundImage: `url(${bg2})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
         {/* Left: Contact Info */}
@@ -50,12 +57,12 @@ const Contact = () => {
           <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-br from-[#632ee3] to-[#9f62f2]">
             Contact Us
           </h2>
-          <p className="text-gray-600">
+          <p className="text-base-100">
             Have questions or need help? Reach out to us and we’ll respond as
             soon as possible.
           </p>
 
-          <div className="flex flex-col gap-3 text-gray-700">
+          <div className="flex flex-col gap-3 text-base-100">
             <p>
               <span className="font-semibold">Email:</span>{" "}
               <a
@@ -80,7 +87,7 @@ const Contact = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex gap-4 mt-4 text-2xl text-gray-600">
+          <div className="flex gap-4 mt-4 text-2xl text-base-100">
             <a
               href="https://facebook.com"
               target="_blank"
