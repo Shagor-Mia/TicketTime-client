@@ -9,7 +9,7 @@ const UserDashboard = () => {
     <div className="md:p-10">
       {/* Be a seller modal button */}
       <BeAVendorModal user={user} />
-      <TransactionHistory user={user} />
+      <TransactionHistory />
     </div>
   );
 };

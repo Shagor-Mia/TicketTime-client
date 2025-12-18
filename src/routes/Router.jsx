@@ -33,6 +33,8 @@ import Advertise from "../pages/Dashboard/Admin/Advertise";
 import AdvertiseDetails from "../pages/Ticket/AdvertiseDetails";
 import Contact from "../pages/Contact/Contact";
 
+import Transaction from "../pages/Transaction/Transaction";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -183,6 +185,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <MyOrders />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "transaction",
+        element: (
+          <PrivateRouter>
+            <Transaction />
           </PrivateRouter>
         ),
       },

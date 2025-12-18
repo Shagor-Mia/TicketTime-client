@@ -13,6 +13,7 @@ import { MdAddTask } from "react-icons/md";
 import { FcManager } from "react-icons/fc";
 import useRole from "../hooks/useRole";
 import { SiVirustotal } from "react-icons/si";
+import { TbTransactionPound } from "react-icons/tb";
 import Navbar from "../components/shared/Navbar";
 import logoImg from "../assets/bus1.png";
 
@@ -27,6 +28,11 @@ const DashboardLayout = () => {
 
   const commonLinks = [
     { to: "/dashboard", label: "Dashboard", icon: <AiOutlineHome /> },
+    {
+      to: "/dashboard/transaction",
+      label: "Transaction",
+      icon: <TbTransactionPound />,
+    },
     {
       to: "/dashboard/my-orders",
       label: "My Tickets",

@@ -6,50 +6,81 @@ import img3 from "../../assets/train1.jpg";
 import contactImg from "../../assets/bus1.jpg";
 import quickBookingImg from "../../assets/bus1.jpg";
 import supportImg from "../../assets/bus1.jpg";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router";
 
+/* ================= ANIMATION ================= */
 const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
 };
 
+/* ================= COLOR MAP (TAILWIND SAFE) ================= */
+const colorMap = {
+  blue: {
+    text: "text-blue-800",
+    btn: "bg-blue-600 hover:bg-blue-700",
+  },
+  green: {
+    text: "text-green-800",
+    btn: "bg-green-600 hover:bg-green-700",
+  },
+  yellow: {
+    text: "text-yellow-800",
+    btn: "bg-yellow-600 hover:bg-yellow-700",
+  },
+};
+
 const About = () => {
+  const { user } = useAuth();
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16 space-y-20">
-      {/* About Us Section */}
+    <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
+      {/* ================= ABOUT US ================= */}
       <section>
-        <h2 className="text-3xl font-bold text-center mb-10">About Us</h2>
+        <h2 className="text-2xl md:text-5xl font-bold text-center mb-5 md:mb-10">
+          About Us
+        </h2>
+        <p className="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base mb-5 md:mb-10">
+          At TicketTime, we simplify travel by combining convenience, security,
+          and reliability. From quick bookings to real-time support, we ensure
+          every journey is smooth from start to finish.
+        </p>
+
         <div className="space-y-6">
           {[img1, img2, img3].map((img, index) => (
             <motion.div
               key={index}
-              className="bg-white px-6 py-6 rounded-xl shadow-md flex flex-col md:flex-row gap-6 items-center hover:shadow-xl transition-shadow duration-300"
+              className="bg-white p-5 md:p-6 rounded-xl shadow-md
+                         flex flex-col sm:flex-row gap-4 sm:gap-6 items-center
+                         hover:shadow-xl transition"
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <div className="flex-shrink-0">
-                <img
-                  src={img}
-                  alt={`Feature ${index}`}
-                  className="w-20 h-20 md:w-24 md:h-24"
-                />
-              </div>
-              <div className="border-l-2 border-gray-300 border-dashed hidden md:block"></div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-semibold text-secondary mb-2">
+              <img
+                src={img}
+                alt="Feature"
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
+              />
+
+              <div className="hidden sm:block border-l-2 border-dashed h-16"></div>
+
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg md:text-2xl font-semibold mb-1 md:mb-2">
                   {index === 0 && "Easy Ticket Booking"}
                   {index === 1 && "Secure Payment"}
                   {index === 2 && "24/7 Customer Support"}
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-sm md:text-base text-gray-600">
                   {index === 0 &&
-                    "Discover and book bus, train, launch, or flight tickets effortlessly. Compare prices, check availability, and reserve your seat in just a few clicks."}
+                    "Discover and book bus, train, launch, or flight tickets effortlessly with just a few clicks."}
                   {index === 1 &&
-                    "Make safe and reliable payments using multiple methods including cards, mobile banking, and digital wallets. Your transactions are encrypted and fully protected."}
+                    "Safe and reliable payments with cards, mobile banking, and digital wallets."}
                   {index === 2 &&
-                    "Our support team is available around the clock to assist you with bookings, cancellations, or any queries. Travel confidently knowing help is always available."}
+                    "Our support team is available 24/7 to help with bookings or issues."}
                 </p>
               </div>
             </motion.div>
@@ -57,84 +88,75 @@ const About = () => {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Contact Us Section */}
-        <motion.section
-          className="bg-green-50 rounded-xl p-8 md:p-10 shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={cardVariants}
-          transition={{ duration: 0.6 }}
-        >
-          <img
-            src={contactImg}
-            alt="Contact Us"
-            className="w-20 h-20 md:w-24 md:h-24 mb-4"
-          />
-          <h3 className="text-2xl font-bold mb-2 text-blue-800">Contact Us</h3>
-          <p className="text-gray-700 mb-4">
-            Reach out via email, phone, or live chat for any questions or
-            assistance with your bookings.
-          </p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">
-            Contact Now
-          </button>
-        </motion.section>
+      {/* ================= SERVICES ================= */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <ServiceCard
+          img={contactImg}
+          title="Contact Us"
+          desc="Reach out via email, phone, or live chat for booking help."
+          btn="Contact Now"
+          color="blue"
+          user={user}
+          to={"/contact"}
+        />
 
-        {/* Quick Booking Section */}
-        <motion.section
-          className="bg-green-50 rounded-xl p-8 md:p-10 shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={cardVariants}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <img
-            src={quickBookingImg}
-            alt="Quick Booking"
-            className="w-20 h-20 md:w-24 md:h-24 mb-4"
-          />
-          <h3 className="text-2xl font-bold mb-2 text-green-800">
-            Quick Booking
-          </h3>
-          <p className="text-gray-700 mb-4">
-            Need tickets urgently? Secure your seat immediately with our
-            emergency booking service.
-          </p>
-          <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold">
-            Book Now
-          </button>
-        </motion.section>
+        <ServiceCard
+          img={quickBookingImg}
+          title="Quick Booking"
+          desc="Need tickets urgently? Book instantly with emergency booking."
+          btn="Book Now"
+          color="green"
+          user={user}
+          to={"/ticket"}
+        />
 
-        {/* Customer Support & Complaints Section */}
-        <motion.section
-          className="bg-green-50 rounded-xl p-8 md:p-10 shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={cardVariants}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <img
-            src={supportImg}
-            alt="Customer Support"
-            className="w-20 h-20 md:w-24 md:h-24 mb-4"
-          />
-          <h3 className="text-2xl font-bold mb-2 text-yellow-800">
-            Customer Support
-          </h3>
-          <p className="text-gray-700 mb-4">
-            Have a complaint or issue? Our dedicated team ensures prompt
-            resolution for a smooth travel experience.
-          </p>
-          <button className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-lg font-semibold">
-            Submit Issue
-          </button>
-        </motion.section>
+        <ServiceCard
+          img={supportImg}
+          title="Customer Support"
+          desc="Submit complaints and get fast resolution from our team."
+          btn="Submit Issue"
+          color="yellow"
+          user={user}
+          to={"/contact"}
+        />
       </div>
     </div>
+  );
+};
+
+/* ================= SERVICE CARD ================= */
+const ServiceCard = ({ img, title, desc, btn, color, user, to }) => {
+  const styles = colorMap[color];
+
+  return (
+    <motion.section
+      className="bg-green-50 rounded-xl p-6 md:p-8 shadow-md
+                 flex flex-col items-center text-center
+                 hover:shadow-xl transition"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={cardVariants}
+      transition={{ duration: 0.5 }}
+    >
+      <img src={img} alt={title} className="w-16 h-16 md:w-24 md:h-24 mb-4" />
+
+      <h3 className={`text-lg md:text-2xl font-bold mb-2 ${styles.text}`}>
+        {title}
+      </h3>
+
+      <p className="text-sm md:text-base text-gray-600 mb-4">{desc}</p>
+
+      {user && (
+        <Link
+          to={`${to}`}
+          className={`w-full md:w-auto ${styles.btn}
+                      text-white px-6 py-2 rounded-lg font-semibold`}
+        >
+          {btn}
+        </Link>
+      )}
+    </motion.section>
   );
 };
 

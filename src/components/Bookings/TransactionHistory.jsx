@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../hooks/useSecureAxios";
+import useAuth from "../../hooks/useAuth";
 
-const TransactionHistory = ({ user }) => {
+const TransactionHistory = () => {
+  const { user } = useAuth();
   const axiosSecure = useSecureAxios();
 
   const {
