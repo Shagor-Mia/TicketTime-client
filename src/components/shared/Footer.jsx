@@ -12,7 +12,7 @@ const Footer = () => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full bg-base-300 py-10 px-5"
+      className="w-full border-t border-white py-10 px-5"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10 px-5 md:px-10">
         {/* Column 1: Logo + Description */}
