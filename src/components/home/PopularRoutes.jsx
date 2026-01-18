@@ -87,7 +87,7 @@ const PopularRoutesSwiper = () => {
         <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold">
           Popular Routes
         </h2>
-        <p className="mt-4 text-gray-600 text-sm sm:text-base">
+        <p className="mt-4 text-base-content text-sm sm:text-base">
           Discover our most booked routes and travel comfortably to your
           favorite destinations. Whether by bus, train, plane, or launch, we
           have you covered!

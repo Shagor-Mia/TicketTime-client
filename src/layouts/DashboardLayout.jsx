@@ -16,6 +16,7 @@ import { SiVirustotal } from "react-icons/si";
 import { TbTransactionPound } from "react-icons/tb";
 import Navbar from "../components/shared/Navbar";
 import logoImg from "../assets/bus1.png";
+import Theme from "../components/shared/Theme";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -104,6 +105,9 @@ const DashboardLayout = () => {
             </label>
 
             <h2 className="text-lg sm:text-2xl font-bold truncate flex justify-between items-center">
+              <span className="text-2xl mx-3">
+                <Theme />
+              </span>
               Dashboard <span className="text-green-600">({role})</span>
               <span className="lg:hidden block">
                 <Link to="/" className="flex items-center gap-2">

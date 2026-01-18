@@ -24,12 +24,12 @@ const Advertising = () => {
       return res.data;
     },
   });
-  console.log(tickets);
+
   if (isLoading) return <LoadingSpinner />;
 
   if (error) {
     return (
-      <p className="text-center py-10 text-red-500">
+      <p className="text-center py-10 text-error">
         Failed to load advertised tickets
       </p>
     );
@@ -37,7 +37,7 @@ const Advertising = () => {
 
   if (tickets.length === 0) {
     return (
-      <p className="text-center py-10 text-gray-500">
+      <p className="text-center py-10 text-base-content/60">
         No advertised tickets available
       </p>
     );
@@ -46,13 +46,13 @@ const Advertising = () => {
   const advertises = tickets.slice(0, 6);
 
   return (
-    <section className="mt-10 py-10 bg-amber-100 rounded-2xl">
+    <section className="mt-10 py-10 rounded-2xl bg-base-200">
       {/* Heading */}
-      <div className="max-w-3xl mx-auto text-center mb-8">
-        <h2 className="text-2xl md:text-5xl font-bold dark:text-black">
+      <div className="max-w-3xl mx-auto text-center mb-8 px-4">
+        <h2 className="text-2xl md:text-5xl font-bold text-base-content">
           Featured Tickets
         </h2>
-        <p className="text-gray-600 mt-2 text-sm sm:text-base">
+        <p className="mt-2 text-sm sm:text-base text-base-content/70">
           Book your next journey effortlessly with our most popular travel
           tickets.
         </p>
@@ -63,7 +63,8 @@ const Advertising = () => {
         className="
           h-[400px] overflow-y-auto
           sm:h-auto sm:overflow-visible
-          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+          gap-5 sm:gap-6
           px-4
         "
         initial="hidden"
@@ -75,7 +76,7 @@ const Advertising = () => {
           <motion.div
             key={ticket._id}
             variants={cardVariants}
-            whileHover={{ scale: 1.03, y: -3 }}
+            whileHover={{ scale: 1.01, y: -2 }}
             transition={{ type: "spring", stiffness: 200 }}
             className="mb-4"
           >

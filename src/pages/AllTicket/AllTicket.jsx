@@ -8,7 +8,7 @@ const AllTicket = () => {
   const axiosSecure = useSecureAxios();
 
   const [page, setPage] = useState(1);
-  const limit = 6;
+  const limit = 8;
   const [searchText, setSearchText] = useState("");
   const [transportType, setTransportType] = useState("");
 
@@ -33,8 +33,8 @@ const AllTicket = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 bg-blue-100">
-      <h2 className="text-3xl font-bold mb-6 text-center dark:text-black">
+    <div className="max-w-7xl mx-auto px-4 py-10 ">
+      <h2 className="md:text-5xl text-3xl font-bold mb-6 text-center ">
         All Tickets
       </h2>
 
@@ -72,7 +72,7 @@ const AllTicket = () => {
       ) : tickets.length === 0 ? (
         <p className="text-center py-10">No tickets found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {tickets.map((ticket) => (
             <AllTicketCard key={ticket._id} ticket={ticket} />
           ))}

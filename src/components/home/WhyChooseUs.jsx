@@ -53,7 +53,7 @@ const cardVariants = {
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-10 mt-10 md:rounded-2xl rounded-xl bg-gray-100">
+    <section className="py-10 mt-10 md:rounded-2xl rounded-xl bg-gray-100 dark:bg-base-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
@@ -63,10 +63,10 @@ const WhyChooseUs = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl md:text-5xl  font-bold dark:text-black">
+          <h2 className="text-2xl md:text-5xl font-bold text-gray-900 dark:text-base-content">
             Why Choose Us?
           </h2>
-          <p className="mt-4 text-gray-600 text-sm sm:text-base">
+          <p className="mt-4 text-gray-600 dark:text-base-content/70 text-sm sm:text-base">
             We make your travel experience easier, safer, and faster with
             trusted services and multiple transport options.
           </p>
@@ -90,7 +90,7 @@ const WhyChooseUs = () => {
               variants={cardVariants}
               whileHover={{ scale: 1.05, y: -5 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl text-center"
+              className="bg-white dark:bg-base-100 p-6 rounded-xl shadow-md hover:shadow-xl text-center"
             >
               <motion.div
                 whileHover={{ scale: 1.2, rotate: 5 }}
@@ -100,10 +100,10 @@ const WhyChooseUs = () => {
                 {benefit.icon}
               </motion.div>
 
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 dark:text-black">
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-900 dark:text-base-content">
                 {benefit.title}
               </h3>
-              <p className="text-gray-600 text-sm sm:text-base">
+              <p className="text-gray-600 dark:text-base-content/70 text-sm sm:text-base">
                 {benefit.description}
               </p>
             </motion.div>

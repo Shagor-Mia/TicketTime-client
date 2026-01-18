@@ -80,18 +80,20 @@ const AddTicketForm = () => {
   if (isError) return <div>Error occurred</div>;
 
   return (
-    <div className="w-full min-h-[calc(100vh-40px)] flex justify-center items-center  p-4 sm:p-6">
+    <div className="w-full min-h-[calc(100vh-40px)] flex justify-center items-center p-4 sm:p-6 ">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-3xl bg-white p-6 sm:p-8 rounded-lg shadow-md space-y-6"
+        className="w-full max-w-3xl bg-white dark:bg-base-100 p-6 sm:p-8 rounded-lg shadow-md space-y-6"
       >
         {/* Ticket Title */}
         <div className="flex flex-col">
-          <label className="text-gray-700 font-medium">Ticket Title</label>
+          <label className="text-gray-700 dark:text-base-content font-medium">
+            Ticket Title
+          </label>
           <input
             type="text"
             placeholder="Enter ticket title"
-            className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
+            className="w-full px-4 py-2 border rounded-md focus:outline-lime-500 bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
             {...register("title", { required: "Title is required" })}
           />
           {errors.title && (
@@ -102,11 +104,13 @@ const AddTicketForm = () => {
         {/* From & To */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium">From</label>
+            <label className="text-gray-700 dark:text-base-content font-medium">
+              From
+            </label>
             <input
               type="text"
               placeholder="Departure location"
-              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500 bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
               {...register("from", { required: "Departure location required" })}
             />
             {errors.from && (
@@ -114,11 +118,13 @@ const AddTicketForm = () => {
             )}
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium">To</label>
+            <label className="text-gray-700 dark:text-base-content font-medium">
+              To
+            </label>
             <input
               type="text"
               placeholder="Arrival location"
-              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500 bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
               {...register("to", { required: "Arrival location required" })}
             />
             {errors.to && (
@@ -129,9 +135,11 @@ const AddTicketForm = () => {
 
         {/* Transport Type */}
         <div className="flex flex-col">
-          <label className="text-gray-700 font-medium">Transport Type</label>
+          <label className="text-gray-700 dark:text-base-content font-medium">
+            Transport Type
+          </label>
           <select
-            className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
+            className="w-full px-4 py-2 border rounded-md focus:outline-lime-500 bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
             {...register("transportType", {
               required: "Select transport type",
             })}
@@ -151,22 +159,24 @@ const AddTicketForm = () => {
         {/* Price & Quantity */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium">
+            <label className="text-gray-700 dark:text-base-content font-medium">
               Price (per unit)
             </label>
             <input
               type="number"
               placeholder="Price"
-              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500 bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
               {...register("price", { required: true, min: 0 })}
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium">Ticket Quantity</label>
+            <label className="text-gray-700 dark:text-base-content font-medium">
+              Ticket Quantity
+            </label>
             <input
               type="number"
               placeholder="Quantity"
-              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-lime-500 bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
               {...register("quantity", { required: true, min: 1 })}
             />
           </div>
@@ -174,20 +184,22 @@ const AddTicketForm = () => {
 
         {/* Departure */}
         <div className="flex flex-col">
-          <label className="text-gray-700 font-medium">
+          <label className="text-gray-700 dark:text-base-content font-medium">
             Departure Date & Time
           </label>
           <input
             type="datetime-local"
-            className="w-full px-4 py-2 border rounded-md focus:outline-lime-500"
+            className="w-full px-4 py-2 border rounded-md focus:outline-lime-500 bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
             {...register("departure", { required: true })}
           />
         </div>
 
         {/* Perks */}
         <div className="flex flex-col">
-          <label className="text-gray-700 font-medium">Perks</label>
-          <div className="flex flex-wrap gap-4 mt-2">
+          <label className="text-gray-700 dark:text-base-content font-medium">
+            Perks
+          </label>
+          <div className="flex flex-wrap gap-4 mt-2 text-gray-900 dark:text-base-content">
             {["AC", "Breakfast", "WiFi", "Snacks"].map((perk) => (
               <label key={perk} className="flex items-center gap-2">
                 <input type="checkbox" value={perk} {...register("perks")} />
@@ -199,10 +211,12 @@ const AddTicketForm = () => {
 
         {/* Image upload */}
         <div className="flex flex-col">
-          <label className="text-gray-700 font-medium">Ticket Image</label>
+          <label className="text-gray-700 dark:text-base-content font-medium">
+            Ticket Image
+          </label>
           <input
             type="file"
-            className="border px-2 py-1 rounded-md"
+            className="border px-2 py-1 rounded-md bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content"
             {...register("image")}
           />
         </div>
@@ -210,21 +224,25 @@ const AddTicketForm = () => {
         {/* Vendor Info */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium">Vendor Name</label>
+            <label className="text-gray-700 dark:text-base-content font-medium">
+              Vendor Name
+            </label>
             <input
               type="text"
               value={user?.displayName || ""}
               readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100"
+              className="w-full px-4 py-2 border rounded-md bg-gray-100 dark:bg-base-300 text-gray-900 dark:text-base-content"
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium">Vendor Email</label>
+            <label className="text-gray-700 dark:text-base-content font-medium">
+              Vendor Email
+            </label>
             <input
               type="text"
               value={user?.email || ""}
               readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100"
+              className="w-full px-4 py-2 border rounded-md bg-gray-100 dark:bg-base-300 text-gray-900 dark:text-base-content"
             />
           </div>
         </div>

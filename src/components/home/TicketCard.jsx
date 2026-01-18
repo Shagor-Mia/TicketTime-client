@@ -9,32 +9,35 @@ const TicketCard = ({ ticket }) => {
   };
 
   return (
-    <div className="rounded-sm md:rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className="rounded-sm md:rounded-lg shadow-lg overflow-hidden bg-base-100 text-base-content hover:shadow-xl transition-shadow duration-300">
       <img
         src={ticket.image}
         alt={ticket.title}
         className="w-full h-48 object-cover"
       />
-      <div className="p-4">
-        <h3 className="text-xl font-semibold mb-2 dark:text-black">
-          {ticket.title}
-        </h3>
-        <p className="text-gray-600 mb-1">
+
+      <div className="p-4 space-y-1">
+        <h3 className="text-xl font-semibold">{ticket.title}</h3>
+
+        <p className="text-base-content/70">
           <strong>Total Ticket:</strong> {ticket.quantity}
         </p>
-        <p className="text-gray-600 mb-1">
+
+        <p className="text-base-content/70">
           <strong>Unit Price:</strong> {ticket.price}
         </p>
-        <p className="text-gray-600 mb-1">
+
+        <p className="text-base-content/70">
           <strong>Transport:</strong> {ticket.transportType}
         </p>
-        <p className="dark:text-black">
+
+        <p className="text-base-content/70">
           <strong>Perks:</strong> {ticket.perks.join(", ")}
         </p>
 
         <button
           onClick={handleSeeDetails}
-          className="bg-blue-600 text-white w-full px-4 py-2 mt-2 rounded hover:bg-blue-700 transition-colors duration-300"
+          className="btn btn-primary btn-sm w-full mt-3"
         >
           See Details
         </button>

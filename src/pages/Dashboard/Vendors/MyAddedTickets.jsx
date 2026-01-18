@@ -92,7 +92,9 @@ const MyAddedTickets = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-6">My Added Tickets</h1>
+      <h1 className="text-2xl font-semibold text-gray-900 mb-6">
+        My Added Tickets
+      </h1>
 
       {/* -------- Filters -------- */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6">

@@ -34,9 +34,7 @@ const Footer = () => {
               TicketTime
             </h2>
           </Link>
-          <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-            Book bus, train, flight tickets easily
-          </p>
+          <p className="mt-2 text-sm">Book bus, train, flight tickets easily</p>
           <p className="mt-3 text-sm text-gray-500">
             TicketTime: © 2025 TicketBari. All rights reserved.
           </p>

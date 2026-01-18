@@ -89,7 +89,7 @@ const MyBookedTicketCard = ({ booking }) => {
       Swal.fire(
         "Payment failed",
         err.response?.data?.message || "Something went wrong",
-        "error"
+        "error",
       );
     }
   };
@@ -98,7 +98,7 @@ const MyBookedTicketCard = ({ booking }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl overflow-hidden shadow-md bg-white"
+      className="rounded-2xl overflow-hidden text-gray-900 shadow-md bg-white"
     >
       <img
         src={ticketImage || "https://via.placeholder.com/400x250"}

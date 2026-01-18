@@ -41,38 +41,51 @@ const ManageOrders = () => {
 
   return (
     <div className="my-10 mx-auto max-w-6xl">
-      <h1 className="text-4xl font-bold mb-6">
+      <h1 className="text-4xl font-bold mb-6 text-gray-900 ">
         Bookings Pending Approval: {data.length}
       </h1>
 
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table w-full dark:table-zebra">
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Ticket</th>
-              <th>User Email</th>
-              <th>Qty</th>
-              <th>Total Price</th>
-              <th>Route</th>
-              <th>Departure</th>
-              <th>Status</th>
-              <th>Actions</th>
+            <tr className="bg-gray-100 dark:bg-base-300">
+              <th className="text-gray-900 dark:text-base-content">#</th>
+              <th className="text-gray-900 dark:text-base-content">Ticket</th>
+              <th className="text-gray-900 dark:text-base-content">
+                User Email
+              </th>
+              <th className="text-gray-900 dark:text-base-content">Qty</th>
+              <th className="text-gray-900 dark:text-base-content">
+                Total Price
+              </th>
+              <th className="text-gray-900 dark:text-base-content">Route</th>
+              <th className="text-gray-900 dark:text-base-content">
+                Departure
+              </th>
+              <th className="text-gray-900 dark:text-base-content">Status</th>
+              <th className="text-gray-900 dark:text-base-content">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {data.map((booking, index) => (
-              <tr key={booking._id}>
-                <th>{index + 1}</th>
-                <td>{booking.ticketTitle}</td>
-                <td>{booking.userEmail}</td>
-                <td>{booking.quantity}</td>
-                <td>৳{booking.totalPrice}</td>
-                <td>
+              <tr
+                key={booking._id}
+                className="dark:bg-base-200 dark:border-b dark:border-gray-600"
+              >
+                <th className="dark:text-base-content">{index + 1}</th>
+                <td className="dark:text-base-content">
+                  {booking.ticketTitle}
+                </td>
+                <td className="dark:text-base-content">{booking.userEmail}</td>
+                <td className="dark:text-base-content">{booking.quantity}</td>
+                <td className="dark:text-base-content">
+                  ৳{booking.totalPrice}
+                </td>
+                <td className="dark:text-base-content">
                   {booking.from} → {booking.to}
                 </td>
-                <td>
+                <td className="dark:text-base-content">
                   {new Date(booking.departure).toLocaleDateString()}{" "}
                   {new Date(booking.departure).toLocaleTimeString([], {
                     hour: "2-digit",
@@ -80,13 +93,13 @@ const ManageOrders = () => {
                   })}
                 </td>
                 <td
-                  className={`${
+                  className={`font-semibold ${
                     booking.status === "accepted"
-                      ? "text-green-600"
+                      ? "text-green-600 dark:text-green-400"
                       : booking.status === "rejected"
-                      ? "text-red-600"
-                      : "text-yellow-600"
-                  } font-semibold`}
+                        ? "text-red-600 dark:text-red-400"
+                        : "text-yellow-600 dark:text-yellow-400"
+                  }`}
                 >
                   {booking.status.toUpperCase()}
                 </td>
@@ -95,13 +108,13 @@ const ManageOrders = () => {
                     <>
                       <button
                         onClick={() => handleAccept(booking._id)}
-                        className="btn btn-sm bg-green-600 hover:bg-green-700 text-white"
+                        className="btn btn-sm bg-green-600 hover:bg-green-700 dark:bg-green-800 dark:hover:bg-green-700 text-white"
                       >
                         <FaUserCheck />
                       </button>
                       <button
                         onClick={() => handleReject(booking._id)}
-                        className="btn btn-sm bg-red-600 hover:bg-red-700 text-white"
+                        className="btn btn-sm bg-red-600 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-700 text-white"
                       >
                         <IoPersonRemoveSharp />
                       </button>

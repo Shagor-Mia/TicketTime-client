@@ -11,26 +11,28 @@ const AllTicketCard = ({ ticket }) => {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-      <div className="rounded-2xl overflow-hidden shadow-md bg-white">
+      <div className="rounded-2xl overflow-hidden shadow-md bg-white dark:bg-base-100 text-gray-900 dark:text-base-content">
         <img src={ticket.image} className="w-full h-48 object-cover" />
 
         <div className="p-4 space-y-2">
-          <h3 className="text-lg font-semibold dark:text-black">
-            {ticket.title}
-          </h3>
-          <p className="text-gray-600">
+          <h3 className="text-lg font-semibold">{ticket.title}</h3>
+
+          <p className="text-gray-600 dark:text-base-content/70">
             {ticket.from} → {ticket.to}
           </p>
-          <p className="text-sm dark:text-black">
+
+          <p className="text-sm text-gray-700 dark:text-base-content/70">
             Transport: {ticket.transportType}
           </p>
-          <p className="font-semibold dark:text-black">৳ {ticket.price}</p>
-          <p className="text-sm dark:text-black">
+
+          <p className="font-semibold">৳ {ticket.price}</p>
+
+          <p className="text-sm text-gray-700 dark:text-base-content/70">
             Available: {ticket.quantity}
           </p>
 
           {/* Departure date and time */}
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 dark:text-base-content/70">
             Departure:{" "}
             {departureDate.toLocaleDateString(undefined, {
               weekday: "short",
@@ -45,9 +47,12 @@ const AllTicketCard = ({ ticket }) => {
             })}
           </p>
 
-          <div className="flex gap-2 flex-wrap text-xs text-gray-500">
+          <div className="flex gap-2 flex-wrap text-xs">
             {ticket.perks.map((p, idx) => (
-              <span key={idx} className="bg-gray-100 px-2 py-1 rounded-full">
+              <span
+                key={idx}
+                className="px-2 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-base-200 dark:text-base-content/80"
+              >
                 {p}
               </span>
             ))}
@@ -56,9 +61,9 @@ const AllTicketCard = ({ ticket }) => {
           <button
             disabled={isExpired || outOfStock}
             onClick={() => navigate(`/ticket/${ticket._id}`)}
-            className={`w-full mt-2 p-2 rounded-lg text-white ${
+            className={`w-full mt-2 p-2 rounded-lg text-white transition ${
               isExpired || outOfStock
-                ? "bg-gray-400"
+                ? "bg-gray-400 dark:bg-base-300 cursor-not-allowed"
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >

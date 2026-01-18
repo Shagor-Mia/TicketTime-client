@@ -40,7 +40,9 @@ const MyOrders = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">My Booked Tickets</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-900">
+        My Booked Tickets
+      </h2>
 
       {/* Search + Filter */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center">

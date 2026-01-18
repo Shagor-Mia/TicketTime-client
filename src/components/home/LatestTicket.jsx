@@ -37,21 +37,23 @@ const LatestTicketsSection = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
-  const latestTickets = data?.tickets?.slice(0, 6) || [];
+  const latestTickets = data?.tickets?.slice(0, 8) || [];
 
   return (
-    <section className="py-10 mt-10 md:rounded-2xl rounded-2xl bg-blue-100">
-      <div className=" mx-auto ">
+    <section className="py-10 mt-10 rounded-2xl bg-blue-300 dark:bg-base-200">
+      <div className="mx-auto">
         {/* Heading */}
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-8"
+          className="max-w-3xl mx-auto text-center mb-8 px-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl md:text-5xl  font-bold">Latest Tickets</h2>
-          <p className="mt-4 text-gray-600 text-sm sm:text-base">
+          <h2 className="text-2xl md:text-5xl font-bold text-gray-900 dark:text-base-content">
+            Latest Tickets
+          </h2>
+          <p className="mt-4 text-sm sm:text-base text-gray-600 dark:text-base-content/70">
             Check out the newest travel tickets available for your next
             adventure!
           </p>
@@ -62,8 +64,8 @@ const LatestTicketsSection = () => {
           className="
             h-[400px] overflow-y-auto
             sm:h-auto sm:overflow-visible
-            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6
-            p-4 sm:p-6
+            grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+            gap-6 p-4 sm:p-6
           "
           variants={containerVariants}
           initial="hidden"
@@ -75,26 +77,26 @@ const LatestTicketsSection = () => {
               <motion.div
                 key={ticket._id}
                 variants={cardVariants}
-                whileHover={{ scale: 1.03, y: -3 }}
+                whileHover={{ scale: 1.001, y: -1 }}
                 transition={{ type: "spring", stiffness: 200 }}
               >
                 <AllTicketCard ticket={ticket} />
               </motion.div>
             ))
           ) : (
-            <p className="col-span-full text-center text-gray-500">
+            <p className="col-span-full text-center text-gray-500 dark:text-base-content/60">
               No tickets available right now.
             </p>
           )}
         </motion.div>
       </div>
+
       {user && (
         <div className="mt-10 text-center">
           <Link
             className="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-lg font-semibold text-sm sm:text-base text-white"
             to={"/ticket"}
           >
-            {" "}
             More..
           </Link>
         </div>
