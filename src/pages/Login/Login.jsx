@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
+import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
 const Login = () => {
@@ -11,10 +12,16 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { userLogin } = useAuth();
+  const { userLogin, setLoading } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // demo
+  const DEMO_ADMIN_EMAIL = "samim@gmail.com";
+  const DEMO_VENDOR_EMAIL = "sagor4@gmail.com";
+  const DEMO_USER_EMAIL = "sagor3@gmail.com";
+  const DEMO_PASSWORD = "Aa@123";
 
   const handleLogin = (data) => {
     userLogin(data.email, data.password)
@@ -25,6 +32,22 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  // DEMO LOGIN
+  const handleDemoLogin = async (email, role) => {
+    setLoading(true);
+    try {
+      const result = await userLogin(email, DEMO_PASSWORD);
+      console.log("after login", result.user);
+      toast.success(`Logged in as Demo ${role}`);
+      navigate(location?.state || "/");
+    } catch (error) {
+      console.error(error);
+      toast.error("Demo login failed. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -99,6 +122,31 @@ const Login = () => {
         {/* Google Login */}
         <div className="mt-6">
           <GoogleLogin />
+        </div>
+        <p className="text-yellow-500 text-center pb-2 font-bold">
+          <span className="text-red-500">OR</span> ,Visit As A
+        </p>
+        <div className="flex justify-center gap-3">
+          <button
+            onClick={() => handleDemoLogin(DEMO_USER_EMAIL, "USER")}
+            className="btn"
+          >
+            User
+          </button>
+
+          <button
+            onClick={() => handleDemoLogin(DEMO_VENDOR_EMAIL, "VENDOR")}
+            className="btn"
+          >
+            Vendor
+          </button>
+
+          <button
+            onClick={() => handleDemoLogin(DEMO_ADMIN_EMAIL, "ADMIN")}
+            className="btn"
+          >
+            Admin
+          </button>
         </div>
       </motion.div>
     </div>
